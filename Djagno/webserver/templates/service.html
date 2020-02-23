@@ -1,0 +1,22 @@
+<html>
+  <head>
+    <title> FIRST PAGE </title>
+  </head>
+
+<body>
+<form action="submit" method="post">
+  {% csrf_token %}
+  Name:<input type="text" name="name">
+  Description:<input type="text" name="desc">
+  Service:<input type="number" name="ser">
+  Status:<input type="checkbox" name="status">
+  <input type="submit">
+</form>
+</body>
+</html>
+
+<style>
+h2{
+color: red
+}
+</style>

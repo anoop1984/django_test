@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Json In Table</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+</head>
+<body>
+    <div class="container" >
+        <div class="table-responsive">
+            <h1>Json Date in Table</h1>
+            <br />
+            <table class="table table-bordered table-stripped" id="result_table">
+                <tr>
+                    <th>Test Description</th>
+                    <th>Severity</th>
+                    <th>IPAddress</th>
+                    <th>Hostname</th>
+                    <th>Command-Executed</th>
+                    <th>Verdict</th>
+                    <th>Remarks</th>
+                    <th>Test ID</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script>
+$(document).ready(function(){
+    $.getJSON("log.json", function(data){
+        var result_data = '';
+        $.each(data, function(key, value){
+        console.log(value);
+        console.log("aaa---")
+
+        });
+    });
+});
+</script>
