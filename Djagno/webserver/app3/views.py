@@ -1,6 +1,8 @@
 from django.shortcuts import render
 from django.http import HttpResponse
 
+from webserver import settings
+
 def test(request):
 #   render(request,'service.html')
     return HttpResponse("testng")
@@ -20,7 +22,9 @@ def send_json(request):
 
     #return JsonResponse(data, safe=False)
 
-  with open('/home/negi_anoopsingh/Djagno/webserver/templates/log.json','r') as f:
+  #with open('/home/negi_anoopsingh/Djagno/webserver/templates/log.json','r') as f:
+  f_path= settings.BASE_DIR +'/templates' + '/log.json'
+  with open(f_path,'r') as f:
   #  data= json.loads(f)
   #return JsonResponse(data, safe=False)
    return HttpResponse(f)

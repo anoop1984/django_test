@@ -4,6 +4,7 @@ from django.core.files.storage import FileSystemStorage
 
 from uploads.core.models import Document
 from uploads.core.forms import DocumentForm
+from django.http import HttpResponse
 
 
 def home(request):
@@ -26,6 +27,11 @@ def simple_upload(request):
 def model_form_upload(request):
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
+        u_file = request.FILES['file']            
+        extension = u_file.split(".")[1].lower()
+        if not 'json' is extension:
+          return redirect('home')
+
         if form.is_valid():
             form.save()
             return redirect('home')
@@ -34,3 +40,10 @@ def model_form_upload(request):
     return render(request, 'core/model_form_upload.html', {
         'form': form
     })
+
+
+def load_json(request):
+    json_file = request.GET['jsonfile']
+    return render(request, 'core/json.html', {'jsonfile':json_file})
+    #return HttpResponse(json_file)   
+#    return redirect('home')

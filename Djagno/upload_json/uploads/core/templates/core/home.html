@@ -2,20 +2,24 @@
 
 {% block content %}
   <ul>
-    <li>
+    <!--li>
       <a href="{% url 'simple_upload' %}">Simple Upload</a>
-    </li>
+    </li-->
     <li>
-      <a href="{% url 'model_form_upload' %}">Model Form Upload</a>
+      <a href="{% url 'model_form_upload' %}">Upload Json Log</a>
     </li>
   </ul>
 
-  <p>Uploaded files:</p>
+  <p>Available Log Files:</p>
   <ul>
     {% for obj in documents %}
       <li>
         <a href="{{ obj.document.url }}">{{ obj.document.name }}</a>
         <small>(Uploaded at: {{ obj.uploaded_at }})</small>
+        <form action="load_json" method="get">
+        <input type="hidden" name="jsonfile" value={{ obj.document.name }}>
+        <input type="submit" value="Log">
+        </form>
       </li>
     {% endfor %}
   </ul>
