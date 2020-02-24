@@ -23,4 +23,5 @@ urlpatterns = [
     path('expression',include('app1.urls')),
     path('',include('app3.urls')),
     path('',include('app2.urls')),
+    path('',include('unica.urls')),
 ]
