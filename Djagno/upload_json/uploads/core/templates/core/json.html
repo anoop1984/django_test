@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Json In Table</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!--link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css"/-->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+
+    <script src="https://www.kryogenix.org/code/browser/sorttable/sorttable.js"></script>
+<style>
+table {
+  font-family: arial, sans-serif;
+  border-collapse: collapse;
+  width: 70%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+</style>
+
+
+</head>
+<body>
+    <meta id="my_json_data" data-json="{{ jsonfile }}">
+    <div class="container" >
+        <div class="table-responsive">
+            <h2>Log-Summary: {{ jsonfile }}</h2>
+            <p><a href="{% url 'home' %}">Return to home</a></p>
+            <br />
+            <!--table class="table table-bordered table-stripped" id="result_table"-->
+            <table class="sortable" id="result_table">
+                <tr class="item">
+                    <th>Test Description</th>
+                    <th>Severity</th>
+                    <th>IPAddress</th>
+                    <th>Hostname</th>
+                    <th>Command-Executed</th>
+                    <th>Verdict</th>
+                    <th>Remarks</th>
+                    <th>Test ID</th>
+                </tr>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>
+
+<script>
+$(document).ready(function(){
+    //var myjson = $('#my_json_data').data("jsonfile");
+    var myjson = "media/{{ jsonfile }}";
+    console.log("hcek")
+    console.log(myjson)
+    $.getJSON(myjson, function(data){
+        var result_data = '';
+        $.each(data, function(key, value){
+           result_data += '<tr class="item">';
+           result_data += '<td>'+value["Test_Description"]+'</td>';
+           result_data += '<td>'+value.Severity+'</td>';
+           result_data += '<td>'+value.IPAddress+'</td>';
+           result_data += '<td>'+value.Hostname+'</td>';
+           result_data += '<td>'+value.Command_Executed+'</td>';
+           var t=value.Verdict
+           if (t.includes("Failed")){
+           result_data += '<td bgcolor="red">'+value.Verdict+'</td>';
+           }
+           else{
+           result_data += '<td bgcolor="green">'+value.Verdict+'</td>';
+           }
+           result_data += '<td>'+value.Remarks+'</td>';
+           result_data += '<td>'+value.Test_ID+'</td>';
+           result_data += '</tr>';
+        });
+        $('#result_table').append(result_data);
+    });
+});
+</script>

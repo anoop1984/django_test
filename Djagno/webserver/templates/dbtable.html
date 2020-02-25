@@ -1,0 +1,46 @@
+<html>
+
+<style>
+table, th, td {
+  border: 2px solid black;
+  text-align: center;
+}
+
+th {
+  background-color: green;
+}
+
+</style>
+<body>
+
+<div>
+ {% if monitor_records %}
+   <table>
+     <thead>
+        <th>Test Description</th>
+        <th>Severity</th>
+        <th>IpAddress</th>
+        <th>Hostname</th>
+        <th>Command-Executed</th>
+        <th>Verdict</th>
+        <th>Remarks</th>
+        <th>testId</th>
+     </thead>
+   {% for it in monitor_records %}
+      <tr>
+        <td>{{ it.testDescription }}</td>
+        <td>{{ it.severity }}</td>
+        <td>{{ it.ipaddress }}</td>
+        <td>{{ it.hostname }}</td>
+        <td>{{ it.commandExecuter }}</td>
+        <td>{{ it.verdict}} </td>
+        <td>{{ it.remark }}</td>
+        <td>{{ it.testId }}</td>
+      </td>
+   {% endfor %}
+   </table>
+  {% endif %}
+</div>
+
+</body>
+</html>
