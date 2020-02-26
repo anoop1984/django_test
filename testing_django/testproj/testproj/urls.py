@@ -20,6 +20,7 @@ from pages import views
 urlpatterns = [
     path('pages/', include('pages.urls') ),
     path('loadjsonindb', views.loadjsonindb),
+    path('dbtable', views.dbtable),
     path('', admin.site.urls),
 
 

@@ -1,21 +1,50 @@
+<!DOCTYPE html>
 <html>
-
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <style>
-table, th, td {
-  border: 2px solid black;
-  text-align: center;
+* {
+  box-sizing: border-box;
 }
 
-th {
-  background-color: green;
+#myInput {
+  background-image: url('/css/searchicon.png');
+  background-position: 10px 10px;
+  background-repeat: no-repeat;
+  width: 100%;
+  font-size: 16px;
+  padding: 12px 20px 12px 40px;
+  border: 1px solid #ddd;
+  margin-bottom: 12px;
 }
 
+#myTable {
+  border-collapse: collapse;
+  width: 75%;
+  border: 1px solid #ddd;
+  font-size: 16px;
+}
+
+#myTable th, #myTable td {
+  text-align: left;
+  padding: 10px;
+}
+
+#myTable tr {
+  border-bottom: 1px solid #ddd;
+}
+
+#myTable tr.header, #myTable tr:hover {
+  background-color: #f1f1f1;
+}
 </style>
+</head>
 <body>
 
-<div>
+<input type="text" id="myInput" onkeyup="myFunction()" placeholder="Search for names.." title="Type in a name">
+<div class="container">
  {% if monitor_records %}
-   <table>
+   <table id="myTable">
      <thead>
         <th>Test Description</th>
         <th>Severity</th>
@@ -27,7 +56,7 @@ th {
         <th>testId</th>
      </thead>
    {% for it in monitor_records %}
-      <tr>
+      <tr class="header">
         <td>{{ it.testDescription }}</td>
         <td>{{ it.severity }}</td>
         <td>{{ it.ipaddress }}</td>
@@ -42,5 +71,28 @@ th {
   {% endif %}
 </div>
 
+<script>
+function myFunction() {
+    var input, filter, found, table, tr, td, i, j;
+    input = document.getElementById("myInput");
+    filter = input.value.toUpperCase();
+    table = document.getElementById("myTable");
+    tr = table.getElementsByTagName("tr");
+    for (i = 1; i < tr.length; i++) {
+        td = tr[i].getElementsByTagName("td");
+        for (j = 0; j < td.length; j++) {
+            if (td[j].innerHTML.toUpperCase().indexOf(filter) > -1) {
+                found = true;
+            }
+        }
+        if (found) {
+            tr[i].style.display = "";
+            found = false;
+        } else {
+            tr[i].style.display = "none";
+        }
+    }
+}
+</script>
 </body>
 </html>

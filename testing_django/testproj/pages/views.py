@@ -46,3 +46,10 @@ def loadjsonindb(request):
     #  return HttpResponse("<em>This is for Unica</em>")
       return render(request, 'upload.html')
 
+
+
+def dbtable(request):
+    from . models import healthCheck 
+    data = healthCheck.objects.all()
+    data_dict = {'monitor_records': data }
+    return render(request,'dbtable.html', context=data_dict)
