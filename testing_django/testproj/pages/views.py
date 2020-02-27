@@ -53,3 +53,16 @@ def dbtable(request):
     data = healthCheck.objects.all()
     data_dict = {'monitor_records': data }
     return render(request,'dbtable.html', context=data_dict)
+
+
+#testing ajax part
+
+from django.http import JsonResponse
+def ajax(request):
+   test1 = "ajax-testing-successful"
+   test2 = "wow"
+   response = {}
+   response['1']=test1
+   response['2']=test2
+   return JsonResponse(response)
+

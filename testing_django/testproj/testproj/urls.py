@@ -21,6 +21,8 @@ urlpatterns = [
     path('pages/', include('pages.urls') ),
     path('loadjsonindb', views.loadjsonindb),
     path('dbtable', views.dbtable),
+
+    path('ajax', views.ajax),
     path('', admin.site.urls),
 
 
