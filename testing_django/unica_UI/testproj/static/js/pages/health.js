@@ -8,18 +8,20 @@
 $(function () {
 
 //Anoop/
- var result
+ var result = []
  $.ajax({
             url : "/ajax",
             type : "GET",
             dataType: "json",
+            async: false,
             success: function(json) {
-               result = json
+              result.push(json); 
             },
             failure: function(json) { 
                 alert('Got an error dude');
             }
         });
+
 //
 
   'use strict'
@@ -186,6 +188,10 @@ $(function () {
 
   // Donut Chart
   var pieChartCanvas = $('#sales-chart-canvas').get(0).getContext('2d')
+  console.log(result)
+  var total = result[0].total
+  var passed = result[0].passed
+  var failed = result[0].failed
   var pieData        = {
     labels: [
         'TOTAL', 
@@ -194,14 +200,14 @@ $(function () {
     ],
     datasets: [
       {
-        data: [30,12,20],
+        data: [total,passed,failed],
         backgroundColor : ['#f56954', '#00a65a', '#f39c12'],
       }
     ]
   }
   var pieOptions = {
     legend: {
-      display: false
+      display: true 
     },
     maintainAspectRatio : false,
     responsive : true,
