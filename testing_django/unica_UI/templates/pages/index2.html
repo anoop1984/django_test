@@ -74,23 +74,23 @@
                 <div class="row">
                   <div class="col-md-8">
                     <p class="text-center">
-                      <strong>Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
+                      <strong id="date">Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
                     </p>
 
                     <div class="chart">
                       <!-- Sales Chart Canvas -->
-                      <canvas id="salesChart" height="180" style="height: 180px;"></canvas>
+                      <canvas id="reportChart" height="250" style="height: 250px;"></canvas>
                     </div>
                     <!-- /.chart-responsive -->
                   </div>
                   <!-- /.col -->
                   <div class="col-md-4">
                     <p class="text-center">
-                      <strong>Goal Completion</strong>
+                      <strong>Stats</strong>
                     </p>
 
                     <div class="progress-group">
-                      Add Products to Cart
+                      Openstack 
                       <span class="float-right"><b>100</b>/200</span>
                       <div class="progress progress-sm">
                         <div class="progress-bar bg-primary" style="width: 75%"></div>
@@ -99,7 +99,7 @@
                     <!-- /.progress-group -->
 
                     <div class="progress-group">
-                      Complete Purchase
+                     SDN 
                       <span class="float-right"><b>310</b>/400</span>
                       <div class="progress progress-sm">
                         <div class="progress-bar bg-danger" style="width: 75%"></div>
@@ -107,7 +107,7 @@
                     </div>
                     <!-- /.progress-group -->
                     <div class="progress-group">
-                      <span class="progress-text">Visit Premium Page</span>
+                      <span class="progress-text">Controller</span>
                       <span class="float-right"><b>480</b>/800</span>
                       <div class="progress progress-sm">
                         <div class="progress-bar bg-success" style="width: 60%"></div>
@@ -116,7 +116,7 @@
 
                     <!-- /.progress-group -->
                     <div class="progress-group">
-                      Send Inquiries
+                      Services 
                       <span class="float-right"><b>250</b>/500</span>
                       <div class="progress progress-sm">
                         <div class="progress-bar bg-warning" style="width: 50%"></div>
@@ -187,10 +187,11 @@
               <div class="inner">
                 <h3 id="total">150</h3>
               
-                <p>Total TestCases</p>
+                <p>Total TestCases
+                <i class="ion ion-home"></i></p>
               </div>
               <div class="icon">
-                <i class="ion ion-bag"></i>
+                <i class="ion ion-home"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -206,7 +207,7 @@
                 <p>Passed</p>
               </div>  
               <div class="icon">
-                <i class="ion ion-stats-bars"></i>
+                <i class="ion ion-beer"></i>
               </div>  
               <a href="/dbtable" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -214,14 +215,14 @@
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-warning">
+            <div class="small-box bg-danger">
               <div class="inner">
                 <h3>44</h3>
 
-                <p>User Registrations</p>
+                <p>FAILED</p>
               </div>
               <div class="icon">
-                <i class="ion ion-person-add"></i>
+                <i class="ion ion-alert"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -229,14 +230,14 @@
           <!-- ./col -->
           <div class="col-lg-3 col-6">
             <!-- small box -->
-            <div class="small-box bg-danger">
+            <div class="small-box bg-warning">
               <div class="inner">
                 <h3>65</h3>
 
-                <p>Unique Visitors</p>
+                <p>FAILED Stats</p>
               </div>
               <div class="icon">
-                <i class="ion ion-pie-graph"></i>
+                <i class="ion ion-heart-broken"></i>
               </div>
               <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
@@ -597,4 +598,72 @@
     </div>
   </footer>
 </div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+
+$(function () {
+
+//Anoop/
+ var result = []
+ $.ajax({
+            url : "/ajax",
+            type : "GET",
+            dataType: "json",
+            async: false,
+            success: function(json) {
+              result.push(json);
+            },
+            failure: function(json) {
+                alert('Got an error dude');
+            }
+        });
+
+//
+  // Donut Chart
+  var pieChartCanvas = $('#reportChart').get(0).getContext('2d')
+  console.log(result)
+  var total = result[0].total
+  var passed = result[0].passed
+  var failed = result[0].failed
+  var failed_major = result[0].severity_failed_major
+  var failed_minor = result[0].severity_failed_minor
+  var failed_catest = result[0].severity_failed_catestrophic
+  var failed_warning = result[0].severity_failed_warning
+
+  var pieData        = {
+    labels: [
+        'PASSED',
+        'FAILED(Major)',
+        'FAILED(Minor)',
+        'FAILED(Catestrophic)',
+        'FAILED(Warning)',
+    ],
+    datasets: [
+      {
+        data: [passed,failed_major,failed_minor,failed_catest,failed_warning ],
+        backgroundColor : ['#00a65a','#8B0000','#FF7F50','#DEB887','#FFEBCD'],
+      }
+    ]
+  }
+  var pieOptions = {
+    legend: {
+      display: true
+    },
+    maintainAspectRatio : false,
+    responsive : true,
+  }
+  //Create pie or douhnut chart
+  // You can switch between pie and douhnut using the method below.
+  var pieChart = new Chart(pieChartCanvas, {
+    type: 'doughnut',
+    data: pieData,
+    options: pieOptions
+  });
+
+document.getElementById('date').textContent = result[0].date
+});
+
+</script>
+
 {% endblock %}

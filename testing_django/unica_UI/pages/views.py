@@ -58,6 +58,7 @@ def dbtable(request):
 #testing ajax part
 
 from django.http import JsonResponse
+import datetime
 def ajax(request):
    test1 = "ajax-testing-successful"
    test2 = "wow"
@@ -70,19 +71,103 @@ def dbdata(request):
     from . models import healthCheck
     data = healthCheck.objects.all().values()
     data1 = healthCheck.objects.filter(verdict="Passed").values('remarks')
-    #print(list(data1))
+    severity_failed_major = healthCheck.objects.filter(severity="Major",verdict="Failed")
+    severity_failed_minor = healthCheck.objects.filter(severity="Minor",verdict="Failed")
+    severity_failed_catestrophic = healthCheck.objects.filter(severity="Catestrophic",verdict="Failed")
+    severity_failed_warning = healthCheck.objects.filter(severity="Warning",verdict="Failed")
+
+    #print(list(data))
     count_passed = len(data1)
     print("Passed Test Case",count_passed)
     fail = healthCheck.objects.filter(verdict="Failed")
     print("Failed Test Case",len(fail))
     print("Total Test Case",len(data))
-
+    date =(data[0])['date'].strftime('%m %B,%Y')
     result={}
+
     result['passed']=count_passed
     result['failed']=len(fail)
     result['total']=len(data)
+    result['date']=date
+    result['severity_failed_major']=len(severity_failed_major)
+    result['severity_failed_minor']=len(severity_failed_minor)
+    result['severity_failed_catestrophic']=len(severity_failed_catestrophic)
+    result['severity_failed_warning']=len(severity_failed_warning)
+   
+    
 
     return JsonResponse(result)
 
     #data_dict = {'monitor_records': list(data) }
     #return JsonResponse(data_dict)
+
+"""
+
+def strip_spaces(list_of_dict):
+    final=[]
+    for m in list_of_dict:
+        temp = {}
+        for k,v in m.items():
+            temp[k]=str(v).strip()
+        final.append(temp)
+    return final
+
+
+
+def refine_result(list_of_dict):
+  final_dict = {}
+  for item in list_of_dict:
+    for k,v in item.items():
+       if k in final_dict:
+          final_dict[k].append(v)
+       else:
+          final_dict[k] = [v]	
+
+
+  return final_dict
+
+
+
+
+
+def dbdata(request):
+    from . models import healthCheck
+
+    data = healthCheck.objects.all().values()  #this is QsetData
+    data_lst = list(data)   #data of list of dictonary
+    data_lst1 = strip_spaces(data_lst)
+    data_refine_dict = refine_result(data_lst1)
+
+
+
+    data1 = healthCheck.objects.filter(verdict__regex=r'*Passed*').values('remarks')
+    severity_failed_major = healthCheck.objects.filter(severity__contains="Major",verdict__contains="Failed")
+    severity_failed_minor = healthCheck.objects.filter(severity__contains="Minor",verdict__contains="Failed")
+    severity_failed_catestrophic = healthCheck.objects.filter(severity="Catestrophic",verdict="Failed")
+    severity_failed_warning = healthCheck.objects.filter(severity="Warning",verdict="Failed")
+
+    #print(list(data))
+    count_passed = len(data1)
+    print("Passed Test Case",count_passed)
+    fail = healthCheck.objects.filter(verdict__contains='Failed')
+    print("Failed Test Case",len(fail))
+    print("Total Test Case",len(data))
+    date =(data[0])['date'].strftime('%m %B,%Y')
+    result={}
+
+    result['passed']=count_passed
+    result['failed']=len(fail)
+    result['total']=len(data)
+    result['date']=date
+    result['severity_failed_major']=len(severity_failed_major)
+    result['severity_failed_minor']=len(severity_failed_minor)
+    result['severity_failed_catestrophic']=len(severity_failed_catestrophic)
+    result['severity_failed_warning']=len(severity_failed_warning)
+
+
+
+    return JsonResponse(result)
+
+    #data_dict = {'monitor_records': list(data) }
+    #return JsonResponse(data_dict)
+"""

@@ -192,16 +192,25 @@ $(function () {
   var total = result[0].total
   var passed = result[0].passed
   var failed = result[0].failed
+  var failed_major = result[0].severity_failed_major
+  var failed_minor = result[0].severity_failed_minor
+  var failed_catest = result[0].severity_failed_catestrophic
+  var failed_warning = result[0].severity_failed_warning
+  
   var pieData        = {
     labels: [
         'TOTAL', 
         'PASSED',
         'FAILED', 
+        'FAILED(Major)',
+        'FAILED(Minor)',
+        'FAILED(Catestrophic)',
+        'FAILED(Warning)',
     ],
     datasets: [
       {
-        data: [total,passed,failed],
-        backgroundColor : ['#f56954', '#00a65a', '#f39c12'],
+        data: [total,passed,failed,failed_major,failed_minor,failed_catest,failed_warning ],
+        backgroundColor : ['#00FFFF', '#00a65a', '#FF0000','#8B0000','#FF7F50','#DEB887','#FFEBCD'],
       }
     ]
   }
