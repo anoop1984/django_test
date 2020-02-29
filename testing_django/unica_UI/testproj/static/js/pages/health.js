@@ -216,7 +216,8 @@ $(function () {
   }
   var pieOptions = {
     legend: {
-      display: true 
+      display: true, 
+      position: 'top', 
     },
     maintainAspectRatio : false,
     responsive : true,

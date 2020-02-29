@@ -16,16 +16,14 @@
 
 
 
-$('#logdate').change(function(){
+$(function () {
+
 //Anoop/
  var result = []
  $.ajax({
-            url : "/ajax-post",
-            type : "POST",
+            url : "/ajax",
+            type : "GET",
             dataType: "json",
-            data: { date: $(this).val(),
-                 'csrfmiddlewaretoken': '{{ csrf_token }}',
-               },
             async: true,
             success: function(json) {
               result.push(json);
@@ -34,7 +32,7 @@ $('#logdate').change(function(){
                 alert('Got an error dude');
             }
         });
-console.log("hello")
+
 console.log(result)
 });
    

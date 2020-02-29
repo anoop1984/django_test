@@ -24,6 +24,7 @@ urlpatterns = [
 
     #path('ajax', views.ajax),
     path('ajax', views.dbdata),
+    path('ajax-post', views.ajax),
     path('', admin.site.urls),
 
 
