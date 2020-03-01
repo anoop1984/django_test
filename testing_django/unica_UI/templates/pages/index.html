@@ -14,6 +14,16 @@
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">Dashboard v1</li>
+               <select id="datelog">
+
+        {% if dates %}
+        {% for date in dates %}
+        <option value="{{ date.date }}">{{ date.date }}</option>
+        {% endfor %}
+        {% endif %}
+              </select>
+
+
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -693,22 +703,30 @@
   <!-- /.content-wrapper -->
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="{% static 'js/pages/health.js' %}"></script>
+
 <script>
-$(document).ready(function(){
-        $.ajax({
-            url : "/ajax",
-            type : "GET",
+$('#datelog').change(function(){
+//Anoop/
+ var result = []
+ $.ajax({
+            url : "/ajax-post",
+            type : "POST",
             dataType: "json",
+            data: { date: $(this).val(),
+                 'csrfmiddlewaretoken': '{{ csrf_token }}',
+               },
+            async: false,
             success: function(json) {
-                document.getElementById('total').textContent = json['total'];
-                document.getElementById('passed').textContent = json['passed'];
-                console.log(json)
+              result.push(json);
             },
-            failure: function(json) { 
+            failure: function(json) {
                 alert('Got an error dude');
             }
         });
+console.log(result)
+document.getElementById('total').textContent = result[0].total_TC
+document.getElementById('passed').textContent = result[0].passed_TC
 });
 </script>
-<script src="{% static 'js/pages/health.js' %}"></script>
 {% endblock %}

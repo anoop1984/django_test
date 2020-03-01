@@ -9,7 +9,8 @@ import datetime
 
 # Create your views here.
 def index(reqeust):
-    return render(reqeust, 'pages/index.html')
+    date_list = healthCheck.objects.values("date").distinct()
+    return render(reqeust, 'pages/index.html',{'dates':date_list})
 
 def about(request):
     return render(request, 'pages/about.html')
@@ -55,6 +56,11 @@ def dbtable(request):
     data_dict = {'monitor_records': data }
     return render(request,'dbtable.html', context=data_dict)
 
+def dbtable_latest(request):
+    date_lst = healthCheck.objects.all().values('date').distinct()
+    data = healthCheck.objects.filter(date=date_lst[0]['date'])  #0th index is lastest date
+    data_dict = {'monitor_records': data , 'date': date_lst[0]['date']}
+    return render(request,'dbtable_latest.html', context=data_dict)
 
 
 def ajax1(request):
@@ -92,26 +98,88 @@ def convert_date(date):
     if "nov" in mm: return yy+"-11-"+dd
     if "dec" in mm: return yy+"-12-"+dd
    
-
-
-
-   
     
+    
+def date_wise_start(date):
+    stat_qs = healthCheck.objects.filter(date=date)
 
+    report={}
+    # date
+    report['date'] = date
+    #total test cases
+    report['total_TC'] = stat_qs.count()
+    #total passed testcases
+    report['passed_TC'] = stat_qs.filter(verdict__contains="Passed").count()
+    #total failed major testcases
+    report['failed_major_TC'] = stat_qs.filter(severity__contains="Major",verdict__contains="Failed").count()
+    #total minor testcases
+    report['failed_minor_TC'] = stat_qs.filter(severity__contains="Minor",verdict__contains="Failed").count()
+    #total warning testcases
+    report['failed_war_TC'] = stat_qs.filter(severity__contains="Warning",verdict__contains="Failed").count()
+    #total catestrophic testcases
+    report['failed_cat_TC'] = stat_qs.filter(severity__contains="Catestrophic",verdict__contains="Failed").count()
+
+    #SDN passed test-cases
+    report['sdn_passed_TC'] = stat_qs.filter(verdict__contains="Passed", test_id__icontains="SDNC").count()
+    #SDN Failed test-cases
+    report['sdn_failed_TC'] = stat_qs.filter(verdict__contains="Failed", test_id__icontains="SDNC").count()
+
+    #FUEL Passed test-cases
+    report['fuel_passed_TC'] = stat_qs.filter(verdict__contains="Passed", test_id__icontains="FUEL").count()
+    #FUEL Failed test-cases
+    report['fuel_failed_TC'] = stat_qs.filter(verdict__contains="Failed", test_id__icontains="FUEL").count()
+
+    #CEE passed test-cases
+    report['cee_passed_TC'] = stat_qs.filter(verdict__contains="Passed", test_id__icontains="CEE").count()
+    #CEE failed test-cases
+    report['cee_failed_TC'] = stat_qs.filter(verdict__contains="Failed", test_id__icontains="CEE").count()
+
+    #All-node passed test-cases
+    report['allnode_passed_TC'] = stat_qs.filter(verdict__contains="Passed", test_id__icontains="ALL-NODE").count()    
+    #ALL-node failed test-cases
+    report['allnode_failed_TC'] = stat_qs.filter(verdict__contains="Failed", test_id__icontains="ALL-NODE").count()
+    
+    return report
+
+
+
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
 def ajax(request):
     date = request.POST['date']
     #convert date string into YYYY-MM-DD formate
     
-    date1=convert_date(date)    
-    print(date1)
+    date1=convert_date(date)  
+    print("date=",date1)
+    response = date_wise_start(date1)
   
-    print("hahaha: ",type(date1))
-    testcount = healthCheck.objects.filter(date=date1).count()
-    print("selected-date:", date)
+    #print("hahaha: ",type(date1))
+    #testcount = healthCheck.objects.filter(date=date1).count()
+    #testcount = healthCheck.objects.filter(date=date1).count()
+    #print("selected-date:", date)
 
-    response={'date':date, 'test-count': testcount} 
+    #response={'date':date, 'test-count': testcount} 
     return JsonResponse(response)
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+ 
     
     
 

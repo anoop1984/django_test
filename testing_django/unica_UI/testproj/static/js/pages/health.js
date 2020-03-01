@@ -9,21 +9,30 @@ $(function () {
 
 //Anoop/
  var result = []
+ var datelog = $('#datelog').val()
+ console.log(datelog)
  $.ajax({
-            url : "/ajax",
-            type : "GET",
+            url : "/ajax-post",
+            type : "POST",
             dataType: "json",
+            data: { date: datelog,
+                 'csrfmiddlewaretoken': '{{ csrf_token }}',
+               },
             async: false,
             success: function(json) {
-              result.push(json); 
+              result.push(json);
             },
-            failure: function(json) { 
+            failure: function(json) {
                 alert('Got an error dude');
             }
         });
 
+ console.log(result)
 //
 
+ document.getElementById('total').textContent = result[0].total_TC
+ document.getElementById('passed').textContent = result[0].passed_TC
+//
   'use strict'
 
   // Make the dashboard widgets sortable Using jquery UI
@@ -189,19 +198,15 @@ $(function () {
   // Donut Chart
   var pieChartCanvas = $('#sales-chart-canvas').get(0).getContext('2d')
   console.log(result)
-  var total = result[0].total
-  var passed = result[0].passed
-  var failed = result[0].failed
-  var failed_major = result[0].severity_failed_major
-  var failed_minor = result[0].severity_failed_minor
-  var failed_catest = result[0].severity_failed_catestrophic
-  var failed_warning = result[0].severity_failed_warning
+  var passed = result[0].total_TC
+  var failed_major = result[0].failed_major_TC
+  var failed_minor = result[0].failed_minor_TC
+  var failed_catest = result[0].failed_cat_TC
+  var failed_warning = result[0].failed_war_TC
   
   var pieData        = {
     labels: [
-        'TOTAL', 
         'PASSED',
-        'FAILED', 
         'FAILED(Major)',
         'FAILED(Minor)',
         'FAILED(Catestrophic)',
@@ -209,8 +214,8 @@ $(function () {
     ],
     datasets: [
       {
-        data: [total,passed,failed,failed_major,failed_minor,failed_catest,failed_warning ],
-        backgroundColor : ['#00FFFF', '#00a65a', '#FF0000','#8B0000','#FF7F50','#DEB887','#FFEBCD'],
+        data: [passed,failed_major,failed_minor,failed_catest,failed_warning ],
+        backgroundColor : ['#00a65a','#8B0000','#FF7F50','#DEB887','#FFEBCD'],
       }
     ]
   }

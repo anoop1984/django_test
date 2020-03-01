@@ -30,6 +30,11 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
+
+
+
+
+
   <!-- Font Awesome -->
   <!-- Ionicons -->
   <!-- DataTables -->
@@ -742,71 +747,21 @@
     <!-- Main content -->
     <section class="content">
       <div class="row">
-        <div class="col-12">
-          <div class="card card1">
-            <div class="card-header">
-              <h3 class="card-title1">DataTable with minimal features & hover style</h3>
-            </div>
-            <!-- /.card-header -->
-            <div class="card-body">
-            {% if monitor_records %}
-              <table id="example2" class="table table-bordered table-hover">
-                <thead>
-                <tr>
-                  <th>Description</th>
-     		  <th>Severity</th>
-        	  <th>IpAddress</th>
-                  <th>Hostname</th>
-                  <th>Command</th>
-                  <th>Verdict</th>
-                  <th>Remarks</th>
-                  <th>TestId</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr>
-              {% for it in monitor_records %}
-                 <td>{{ it.desc }}</td>
-                 <td>{{ it.severity }}</td>
-                 <td>{{ it.ipaddr }}</td>
-                 <td>{{ it.hostname }}</td>
-                 <td>{{ it.command }}</td>
-                 <td>{{ it.verdict}} </td>
-                 <td>{{ it.remarks }}</td>
-                 <td>{{ it.test_id }}</td>
-                </tr>
-             {% endfor %}
-                </tbody>
-                <tfoot>
-                <tr>
-                  <th>Description</th>
-                  <th>Severity</th>
-                  <th>IpAddress</th>
-                  <th>Hostname</th>
-                  <th>Command</th>
-                  <th>Verdict</th>
-                  <th>Remarks</th>
-                  <th>TestId</th>
-                </tr>
-                </tfoot>
-              </table>
-            {% endif %}
-            </div>
-            <!-- /.card-body -->
-          </div>
+          
           <!-- /.card -->
 
-          <div class="card">
+          <div class="card ">
             <div class="card-header">
               <h3 class="card-title2">Health-Check Report: </h3>
             </div>
             <!-- /.card-header -->
-            <div class="card-body">
+            <div class="card-body col-md-12">
               <!--table id="example1" class="table table-bordered table-striped"-->
             {% if monitor_records %}
-              <table id="example1" class="table table-bordered table-hover">
+              <table id="example1" class="table table-bordered table-hover" style="width:100%">
                 <thead>
                 <tr>
+                  <th>Date</th>
                   <th>Description</th>
                   <th>Severity</th>
                   <th>IpAddress</th>
@@ -820,6 +775,7 @@
                 <tbody>
                 <tr>
               {% for it in monitor_records %}
+                 <td>{{ it.date }}</td>
                  <td>{{ it.desc }}</td>
                  <td>{{ it.severity }}</td>
                  <td>{{ it.ipaddr }}</td>
@@ -833,6 +789,7 @@
                 </tbody>
                 <tfoot>
                 <tr>
+                  <th>Date</th>
                   <th>Description</th>
                   <th>Severity</th>
                   <th>IpAddress</th>
@@ -849,7 +806,6 @@
             <!-- /.card-body -->
           </div>
           <!-- /.card -->
-        </div>
         <!-- /.col -->
       </div>
       <!-- /.row -->
@@ -883,20 +839,61 @@
 <!-- AdminLTE App -->
 <script src="{% static 'js/adminlte.min.js' %}"></script>
 
+
+
+<!--
+<script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/fixedheader/3.1.6/js/dataTables.fixedHeader.min.js"></script>
+-->
+
+
 <!-- page script -->
 <script>
+/*
   $(function () {
-    $("#example1").DataTable();
-    $('#example2').DataTable({
-      "paging": true,
-      "lengthChange": false,
-      "searching": false,
-      "ordering": true,
-      "info": true,
-      "autoWidth": false,
+    $("#example1").DataTable({
+       fixedHeader: {
+            header: true,
+            footer: true
+       }
     });
   });
- $('.card1').hide()
+
+*/
+
+$(document).ready(function() {
+    $('#example1').DataTable( {
+        "scrollX": true,
+        initComplete: function () {
+            this.api().columns().every( function () {
+                var column = this;
+                console.log(this);
+                var select = $('<select><option value=""></option></select>')
+                    .appendTo( $(column.footer()).empty() )
+                    .on( 'change', function () {
+                        var val = $.fn.dataTable.util.escapeRegex(
+                            $(this).val()
+                        );
+ 
+                        column
+                            .search( val ? '^'+val+'$' : '', true, false )
+                            .draw();
+                    } );
+ 
+                column.data().unique().sort().each( function ( d, j ) {
+                    select.append( '<option value="'+d+'">'+d+'</option>' )
+                } );
+            } );
+        }
+    } );
+
+
+
+
+} );
+
+// $('.card1').hide()
 
  var d = new Date();
  var strDate = d.getDate() + "/" + (d.getMonth()+1) + "/" + d.getFullYear();
