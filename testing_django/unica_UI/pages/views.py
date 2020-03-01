@@ -16,7 +16,8 @@ def about(request):
     return render(request, 'pages/about.html')
 
 def index2(request):
-    return render(request, 'pages/index2.html')
+    date_list = healthCheck.objects.values("date").distinct()
+    return render(request, 'pages/index2.html',{'dates':date_list})
 
 
 def index3(request):
@@ -102,6 +103,7 @@ def convert_date(date):
     
 def date_wise_start(date):
     stat_qs = healthCheck.objects.filter(date=date)
+   
 
     report={}
     # date
@@ -110,12 +112,19 @@ def date_wise_start(date):
     report['total_TC'] = stat_qs.count()
     #total passed testcases
     report['passed_TC'] = stat_qs.filter(verdict__contains="Passed").count()
+
+    #total failed testcases
+    report['failed_TC'] = stat_qs.filter(verdict__contains="Failed").count()
+
     #total failed major testcases
     report['failed_major_TC'] = stat_qs.filter(severity__contains="Major",verdict__contains="Failed").count()
+
     #total minor testcases
     report['failed_minor_TC'] = stat_qs.filter(severity__contains="Minor",verdict__contains="Failed").count()
+
     #total warning testcases
     report['failed_war_TC'] = stat_qs.filter(severity__contains="Warning",verdict__contains="Failed").count()
+
     #total catestrophic testcases
     report['failed_cat_TC'] = stat_qs.filter(severity__contains="Catestrophic",verdict__contains="Failed").count()
 
@@ -138,6 +147,8 @@ def date_wise_start(date):
     report['allnode_passed_TC'] = stat_qs.filter(verdict__contains="Passed", test_id__icontains="ALL-NODE").count()    
     #ALL-node failed test-cases
     report['allnode_failed_TC'] = stat_qs.filter(verdict__contains="Failed", test_id__icontains="ALL-NODE").count()
+     
+    report['failed_list'] = list(stat_qs.filter(verdict__contains="Failed").values())
     
     return report
 

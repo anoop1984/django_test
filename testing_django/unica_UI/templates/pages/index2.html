@@ -1,6 +1,7 @@
 
 {% extends 'base.html' %}
 
+{% load static %}
 {% block content %}
 
 
@@ -17,6 +18,14 @@
             <ol class="breadcrumb float-sm-right">
               <li class="breadcrumb-item"><a href="#">Home</a></li>
               <li class="breadcrumb-item active">UNICA Healthcheck</li>
+                <select id="datelog" class="form-control">
+         	{% if dates %}
+        	{% for date in dates %}
+        	<option value="{{ date.date }}">{{ date.date }}</option>
+        	{% endfor %}
+        	{% endif %}
+               </select>
+              
             </ol>
           </div><!-- /.col -->
         </div><!-- /.row -->
@@ -70,7 +79,7 @@
                 <div class="row">
                   <div class="col-md-8">
                     <p class="text-center">
-                      <strong id="date">Sales: 1 Jan, 2014 - 30 Jul, 2014</strong>
+                      <strong id="date">--</strong>
                     </p>
 
                     <div class="chart">
@@ -87,35 +96,35 @@
 
                     <div class="progress-group">
                       Openstack 
-                      <span class="float-right"><b>100</b>/200</span>
+                      <span class="float-right" id="os_value" >0/0</span>
                       <div class="progress progress-sm">
-                        <div class="progress-bar bg-primary" style="width: 75%"></div>
+                        <div class="progress-bar bg-primary" id="os_val_per" style="width: 0%"></div>
                       </div>
                     </div>
                     <!-- /.progress-group -->
 
                     <div class="progress-group">
                      SDN 
-                      <span class="float-right"><b>310</b>/400</span>
+                      <span class="float-right" id="sdn_value">0/0</span>
                       <div class="progress progress-sm">
-                        <div class="progress-bar bg-danger" style="width: 75%"></div>
+                        <div class="progress-bar bg-danger" id="sdn_val_per" style="width: 0%"></div>
                       </div>
                     </div>
                     <!-- /.progress-group -->
                     <div class="progress-group">
                       <span class="progress-text">Controller</span>
-                      <span class="float-right"><b>480</b>/800</span>
+                      <span class="float-right" id="con_value">0/0</span>
                       <div class="progress progress-sm">
-                        <div class="progress-bar bg-success" style="width: 60%"></div>
+                        <div class="progress-bar bg-success" id="con_val_per" style="width: 0%"></div>
                       </div>
                     </div>
 
                     <!-- /.progress-group -->
                     <div class="progress-group">
                       Services 
-                      <span class="float-right"><b>250</b>/500</span>
+                      <span class="float-right" id="srv_value">0/0</span>
                       <div class="progress progress-sm">
-                        <div class="progress-bar bg-warning" style="width: 50%"></div>
+                        <div class="progress-bar bg-warning" id="srv_val_per" style="width: 0%"></div>
                       </div>
                     </div>
                     <!-- /.progress-group -->
@@ -129,36 +138,36 @@
                 <div class="row">
                   <div class="col-sm-3 col-6">
                     <div class="description-block border-right">
-                      <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 17%</span>
-                      <h5 class="description-header">$35,210.43</h5>
-                      <span class="description-text">TOTAL REVENUE</span>
+                      <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> </span>
+                      <h5 class="description-header"></h5>
+                      <span class="description-text"></span>
                     </div>
                     <!-- /.description-block -->
                   </div>
                   <!-- /.col -->
                   <div class="col-sm-3 col-6">
                     <div class="description-block border-right">
-                      <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i> 0%</span>
-                      <h5 class="description-header">$10,390.90</h5>
-                      <span class="description-text">TOTAL COST</span>
+                      <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i></span>
+                      <h5 class="description-header"></h5>
+                      <span class="description-text"></span>
                     </div>
                     <!-- /.description-block -->
                   </div>
                   <!-- /.col -->
                   <div class="col-sm-3 col-6">
                     <div class="description-block border-right">
-                      <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> 20%</span>
-                      <h5 class="description-header">$24,813.53</h5>
-                      <span class="description-text">TOTAL PROFIT</span>
+                      <span class="description-percentage text-success"><i class="fas fa-caret-up"></i></span>
+                      <h5 class="description-header"></h5>
+                      <span class="description-text"></span>
                     </div>
                     <!-- /.description-block -->
                   </div>
                   <!-- /.col -->
                   <div class="col-sm-3 col-6">
                     <div class="description-block">
-                      <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> 18%</span>
-                      <h5 class="description-header">1200</h5>
-                      <span class="description-text">GOAL COMPLETIONS</span>
+                      <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> </span>
+                      <h5 class="description-header"></h5>
+                      <span class="description-text"></span>
                     </div>
                     <!-- /.description-block -->
                   </div>
@@ -181,7 +190,7 @@
             <!-- small box -->
             <div class="small-box bg-info">
               <div class="inner">
-                <h3 id="total">150</h3>
+                <h3 id="total">0</h3>
               
                 <p>Total TestCases
                 <i class="ion ion-home"></i></p>
@@ -198,7 +207,7 @@
             <div class="small-box bg-success">
               <div class="inner">
                 <!--h3>53<sup style="font-size: 20px">%</sup></h3-->
-                <h3 id="passed">53</h3>
+                <h3 id="passed">0</h3>
                   
                 <p>Passed</p>
               </div>  
@@ -213,7 +222,7 @@
             <!-- small box -->
             <div class="small-box bg-danger">
               <div class="inner">
-                <h3>44</h3>
+                <h3 id="failed">0</h3>
 
                 <p>FAILED</p>
               </div>
@@ -228,9 +237,9 @@
             <!-- small box -->
             <div class="small-box bg-warning">
               <div class="inner">
-                <h3>65</h3>
+                <h3 id="failedm">0</h3>
 
-                <p>FAILED Stats</p>
+                <p>FAILED Major</p>
               </div>
               <div class="icon">
                 <i class="ion ion-heart-broken"></i>
@@ -477,7 +486,7 @@
         
              <div class="card">
               <div class="card-header border-transparent">
-                <h3 class="card-title">Latest Orders</h3>
+                <h3 class="card-title">Failed Test-Cases</h3>
 
                 <div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
@@ -491,82 +500,27 @@
               <!-- /.card-header -->
               <div class="card-body p-0">
                 <div class="table-responsive">
-                  <table class="table m-0">
-                    <thead>
-                    <tr>
-                      <th>Order ID</th>
-                      <th>Item</th>
-                      <th>Status</th>
-                      <th>Popularity</th>
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                      <td>Call of Duty IV</td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-warning">Pending</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                      <td>iPhone 6 Plus</td>
-                      <td><span class="badge badge-danger">Delivered</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-info">Processing</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#00c0ef" data-height="20">90,80,-90,70,-61,83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR1848</a></td>
-                      <td>Samsung Smart TV</td>
-                      <td><span class="badge badge-warning">Pending</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f39c12" data-height="20">90,80,-90,70,61,-83,68</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR7429</a></td>
-                      <td>iPhone 6 Plus</td>
-                      <td><span class="badge badge-danger">Delivered</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#f56954" data-height="20">90,-80,90,70,-61,83,63</div>
-                      </td>
-                    </tr>
-                    <tr>
-                      <td><a href="pages/examples/invoice.html">OR9842</a></td>
-                      <td>Call of Duty IV</td>
-                      <td><span class="badge badge-success">Shipped</span></td>
-                      <td>
-                        <div class="sparkbar" data-color="#00a65a" data-height="20">90,80,90,-70,61,-83,63</div>
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
+                <table id="example1" class="table table-bordered table-hover" style="width:100%">
+                <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Description</th>
+                  <th>Severity</th>
+                  <th>IpAddress</th>
+                  <th>Hostname</th>
+                  <th>Command</th>
+                  <th>Verdict</th>
+                  <th>Remarks</th>
+                  <th>TestId</th>
+                </tr>
+                </thead> 
+
+                </table>
                 </div>
                 <!-- /.table-responsive -->
               </div>
               <!-- /.card-body -->
-              <div class="card-footer clearfix">
-                <a href="javascript:void(0)" class="btn btn-sm btn-info float-left">Place New Order</a>
-                <a href="javascript:void(0)" class="btn btn-sm btn-secondary float-right">View All Orders</a>
-              </div>
+              
               <!-- /.card-footer -->
             </div>
            </div>
@@ -586,46 +540,51 @@
   <!-- /.control-sidebar -->
 
   <!-- Main Footer -->
-  <footer class="main-footer">
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">AdminLTE.io</a>.</strong>
-    All rights reserved.
-    <div class="float-right d-none d-sm-inline-block">
-      <b>Version</b> 3.0.3-pre
-    </div>
-  </footer>
+  
 </div>
 </div>
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script src="{% static 'plugins/jquery/jquery.min.js' %}"></script>
+<!--script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script-->
+<script src="{% static 'plugins/datatables/jquery.dataTables.js' %}"></script>
+<script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
+
 <script>
 
-$(function () {
-
+$('#datelog').change(function(){
 //Anoop/
  var result = []
  $.ajax({
-            url : "/ajax",
-            type : "GET",
+            url : "/ajax-post",
+            type : "POST",
             dataType: "json",
+            data: { date: $(this).val(),
+                 'csrfmiddlewaretoken': '{{ csrf_token }}',
+               },
             async: false,
             success: function(json) {
               result.push(json);
             },
             failure: function(json) {
-                alert('Got an error dude');
+                alert('Got an error dude: Contact Support Team.!!');
             }
         });
+
+ console.log(result)
+ document.getElementById('total').textContent = result[0].total_TC
+ document.getElementById('passed').textContent = result[0].passed_TC
+ document.getElementById('failed').textContent = result[0].failed_TC
+ document.getElementById('failedm').textContent = result[0].failed_major_TC
+
 
 //
   // Donut Chart
   var pieChartCanvas = $('#reportChart').get(0).getContext('2d')
   console.log(result)
-  var total = result[0].total
-  var passed = result[0].passed
-  var failed = result[0].failed
-  var failed_major = result[0].severity_failed_major
-  var failed_minor = result[0].severity_failed_minor
-  var failed_catest = result[0].severity_failed_catestrophic
-  var failed_warning = result[0].severity_failed_warning
+  var passed = result[0].passed_TC
+  var failed_major = result[0].failed_major_TC
+  var failed_minor = result[0].failed_minor_TC
+  var failed_catest = result[0].failed_cat_TC
+  var failed_warning = result[0].failed_war_TC
 
   var pieData        = {
     labels: [
@@ -644,7 +603,8 @@ $(function () {
   }
   var pieOptions = {
     legend: {
-      display: true
+      display: true,
+      position: 'left',
     },
     maintainAspectRatio : false,
     responsive : true,
@@ -658,6 +618,70 @@ $(function () {
   });
 
 document.getElementById('date').textContent = result[0].date
+
+pass = result[0].sdn_passed_TC
+fail = result[0].sdn_failed_TC
+total = pass + fail
+pass_per = (pass/ total * 100) + '%'
+data1 = pass.toString()
+data2 = total.toString()
+data = '<b>'+data1+'</b>/'+data2 +' [<b>Passed</b>/Total]'
+$('#sdn_value').html(data)
+$('#sdn_val_per').width(pass_per)
+
+
+pass = result[0].cee_passed_TC
+fail = result[0].cee_failed_TC
+total = pass + fail
+pass_per = (pass/ total * 100) + '%'
+data1 = pass.toString()
+data2 = total.toString()
+data = '<b>'+data1+'</b>/'+data2 +' [<b>Passed</b>/Total]'
+$('#os_value').html(data)
+$('#os_val_er').width(pass_per)
+
+
+pass = result[0].allnode_passed_TC
+fail = result[0].allnode_failed_TC
+total = pass + fail
+pass_per = (pass/ total * 100) + '%'
+data1 = pass.toString()
+data2 = total.toString()
+data = '<b>'+data1+'</b>/'+data2 +' [<b>Passed</b>/Total]'
+$('#srv_value').html(data)
+$('#srv_val_per').width(pass_per)
+
+
+pass = result[0].fuel_passed_TC
+fail = result[0].fuel_failed_TC
+total = pass + fail
+pass_per = (pass/ total * 100) + '%'
+console.log(pass_per)
+data1 = pass.toString()
+data2 = total.toString()
+data = '<b>'+data1+'</b>/'+data2 +' [<b>Passed</b>/Total]'
+$('#con_val_per').width(pass_per)
+$('#con_value').html(data)
+
+$('#example1 td').remove()
+var result_data =  ''
+for(let item of result[0].failed_list) {
+ 	result_data +='<tr>';
+        result_data +='<td>'+item.date+'</td>';
+        result_data +='<td>'+item.desc+'</td>';
+        result_data +='<td>'+item.severity+'</td>';
+        result_data +='<td>'+item.ipaddr+'</td>';
+        result_data +='<td>'+item.hostname+'</td>';
+        result_data +='<td>'+item.command+'</td>';
+        result_data +='<td>'+item.verdict+'</td>';
+        result_data +='<td>'+item.remarks+'</td>';
+        result_data +='<td>'+item.test_id+'</td>';
+	result_data +='</tr>';
+}
+$('#example1').append(result_data)
+
+
+
 });
 
 </script>
