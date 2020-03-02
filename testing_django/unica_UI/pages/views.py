@@ -148,7 +148,7 @@ def date_wise_start(date):
     #ALL-node failed test-cases
     report['allnode_failed_TC'] = stat_qs.filter(verdict__contains="Failed", test_id__icontains="ALL-NODE").count()
      
-    report['failed_list'] = list(stat_qs.filter(verdict__contains="Failed").values())
+    #report['failed_list'] = list(stat_qs.filter(verdict__contains="Failed").values())
     
     return report
 
@@ -163,6 +163,7 @@ def ajax(request):
     date1=convert_date(date)  
     print("date=",date1)
     response = date_wise_start(date1)
+    #print(response)
   
     #print("hahaha: ",type(date1))
     #testcount = healthCheck.objects.filter(date=date1).count()
@@ -253,6 +254,20 @@ def refine_result(list_of_dict):
 
 
 
+def dbtable_info(request):
+    date = request.GET['date']
+    rq_type = request.GET['type']
+    print("date=",date)
+    print(rq_type)
+    date = convert_date(date)
+
+    if  rq_type == "1" : data = healthCheck.objects.filter(date=date) 
+    if  rq_type == "2" : data = healthCheck.objects.filter(date=date, verdict__contains = "Passed") 
+    if  rq_type == "3" : data = healthCheck.objects.filter(date=date, verdict__contains = "Failed") 
+    if  rq_type == "4" : data = healthCheck.objects.filter(date=date, verdict__contains = "Failed", severity__contains="Major") 
+
+    data_dict = {'monitor_records': data , 'date': date}
+    return render(request,'dbtable_latest.html', context=data_dict)
 
 
 def dbdata1(request):

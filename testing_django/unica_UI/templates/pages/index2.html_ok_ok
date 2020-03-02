@@ -37,16 +37,22 @@
     <section class="content">
 
      <div class="row">
+          <div class="col-md-12">
+
+          <!-- /.col -->
+        </div>
+        <!-- /.row -->
       <div class="container-fluid">
         <!-- Info boxes -->
        <!-- info box deleted--> 
         <!-- /.row -->
 
         <div class="row">
-          <div class="col-md-6">
+          <div class="col-md-12">
             <div class="card">
               <div class="card-header">
                 <h5 class="card-title">Health Report</h5>
+
                 <!--div class="card-tools">
                   <button type="button" class="btn btn-tool" data-card-widget="collapse">
                     <i class="fas fa-minus"></i>
@@ -128,62 +134,50 @@
                 <!-- /.row -->
               </div>
               <!-- ./card-body -->
-              
+              <div class="card-footer">
+                <div class="row">
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <span class="description-percentage text-success"><i class="fas fa-caret-up"></i> </span>
+                      <h5 class="description-header"></h5>
+                      <span class="description-text"></span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <span class="description-percentage text-warning"><i class="fas fa-caret-left"></i></span>
+                      <h5 class="description-header"></h5>
+                      <span class="description-text"></span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block border-right">
+                      <span class="description-percentage text-success"><i class="fas fa-caret-up"></i></span>
+                      <h5 class="description-header"></h5>
+                      <span class="description-text"></span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                  <!-- /.col -->
+                  <div class="col-sm-3 col-6">
+                    <div class="description-block">
+                      <span class="description-percentage text-danger"><i class="fas fa-caret-down"></i> </span>
+                      <h5 class="description-header"></h5>
+                      <span class="description-text"></span>
+                    </div>
+                    <!-- /.description-block -->
+                  </div>
+                </div>
+                <!-- /.row -->
+              </div>
               <!-- /.card-footer -->
             </div>
             <!-- /.card -->
           </div>
-
-
-          <!---Adding Histor Char Grap--> 
-
-          <div class="col-md-6">
-            <div class="card">
-              <div class="card-header">
-                <div class="d-flex justify-content-between">
-                  <h3 class="card-title">Comparison</h3>
-                 <select id="datelog1" class="form-control" style="width:150px; height:32px;">
-                {% if dates %}
-                {% for date in dates %}
-                <option value="{{ date.date }}">{{ date.date }}</option>
-                {% endfor %}
-                {% endif %}
-               </select>
-                </div> 
-              </div>
-              <div class="card-body">
-                <div class="d-flex">
-                  <p class="d-flex flex-column">
-                    <span></span>
-                  </p>
-                  <p class="ml-auto d-flex flex-column text-right">
-                    
-                    <span class="text-muted">Data</span>
-                  </p>
-                </div>
-                <!-- /.d-flex -->
-
-                <div class="chart">
-                  <canvas id="history-chart" height="250" style="height: 250px;"></canvas>
-                </div>
-                <div class="d-flex flex-row justify-content-end">
-                  <span class="mr-2" id="blue_date">
-                    <i class="fas fa-square text-primary"></i> This year
-                  </span>
-
-                  <span id="gray_date">
-                    <i class="fas fa-square text-gray"></i> Last year
-                  </span>
-                </div>
-
-                
-              </div>
-            </div>
-            <!-- /.card -->
-
-            
-          </div>   
-          <!---End Histor Char Grap--> 
           <!-- /.col -->
         </div>
         <!-- /.row -->
@@ -204,7 +198,7 @@
               <div class="icon">
                 <i class="ion ion-home"></i>
               </div>
-              <a id="date_report1" href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -218,9 +212,9 @@
                 <p>Passed</p>
               </div>  
               <div class="icon">
-                <i class="ion ion-thumbsup"></i>
+                <i class="ion ion-beer"></i>
               </div>  
-              <a id="date_report2" href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="/dbtable" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -233,9 +227,9 @@
                 <p>FAILED</p>
               </div>
               <div class="icon">
-                <i class="ion ion-thumbsdown"></i>
+                <i class="ion ion-alert"></i>
               </div>
-              <a id="date_report3" href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -248,9 +242,9 @@
                 <p>FAILED Major</p>
               </div>
               <div class="icon">
-                <i class="ion ion-alert"></i>
+                <i class="ion ion-heart-broken"></i>
               </div>
-              <a id="date_report4" href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
+              <a href="#" class="small-box-footer">More info <i class="fas fa-arrow-circle-right"></i></a>
             </div>
           </div>
           <!-- ./col -->
@@ -259,18 +253,20 @@
 <!---unica-->
 
         <!-- Main row -->
+        <div class="row">
           <!-- Left col -->
+          <div class="col-md-8">
             <!-- MAP & BOX PANE -->
             
             <!-- /.card -->
             <div class="row">
 <!--Start-->
-             <div class="col-md-4">
+              <div class="col-md-6">
                 <!-- DIRECT CHAT -->
                 
             <div class="card">
               <div class="card-header">
-                <h3 class="card-title">OpenStack Stats</h3>
+                <h3 class="card-title">Bordered Table</h3>
               </div>
 
               <!-- /.card-header -->
@@ -278,31 +274,53 @@
                 <table class="table table-bordered">
                   <thead>
                     <tr>
+                      <th style="width: 10px">#</th>
                       <th>Task</th>
-                      <th>Task</th>
+                      <th>Progress</th>
+                      <th style="width: 40px">Label</th>
                     </tr>
                   </thead>
                   <tbody>
                     <tr>
-                      <td>nova list 
-                       <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>
-                     </td>
-                      <td>nova hypervision <i class="ion ion-thumbsdown" style="font-size:30px;color:red"></i></td>
+                      <td>1.</td>
+                      <td>Update software</td>
+                      <td>
+                        <div class="progress progress-xs">
+                          <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
+                        </div>
+                      </td>
+                      <td><span class="badge bg-danger">55%</span></td>
                     </tr>
                     <tr>
-                      <td>cinder service</td>
-                      <td>neutron agent</td>
+                      <td>2.</td>
+                      <td>Clean database</td>
+                      <td>
+                        <div class="progress progress-xs">
+                          <div class="progress-bar bg-warning" style="width: 70%"></div>
+                        </div>
+                      </td>
+                      <td><span class="badge bg-warning">70%</span></td>
                     </tr>
                     <tr>
-                      <td>nova servic</td>
-                      <td>glance image</td>
+                      <td>3.</td>
+                      <td>Cron job running</td>
+                      <td>
+                        <div class="progress progress-xs progress-striped active">
+                          <div class="progress-bar bg-primary" style="width: 30%"></div>
+                        </div>
+                      </td>
+                      <td><span class="badge bg-primary">30%</span></td>
                     </tr>
                     <tr>
-                      <td>ceilometer meter</td>
-                      <td>openstack project</td>
+                      <td>4.</td>
+                      <td>Fix and squish bugs</td>
+                      <td>
+                        <div class="progress progress-xs progress-striped active">
+                          <div class="progress-bar bg-success" style="width: 90%"></div>
+                        </div>
+                      </td>
+                      <td><span class="badge bg-success">90%</span></td>
                     </tr>
-                    <tr><td>openstack service</td>
-                       <td>neutron net</td></tr>
                   </tbody>
                 </table>
               </div>
@@ -318,7 +336,7 @@
               <!-- /.col -->
 
 <!--start-->
-              <div class="col-md-4">
+              <div class="col-md-6">
                 <!-- DIRECT CHAT -->
                 
             <div class="card">
@@ -389,79 +407,8 @@
                 <!--/.direct-chat -->
               </div>
 <!--end-->
-
-<!---->
-           <div class="col-md-4">
-                <!-- DIRECT CHAT -->
-                
-            <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Bordered Table</h3>
-              </div>
-
-              <!-- /.card-header -->
-              <div class="card-body">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th style="width: 10px">#</th>
-                      <th>Task</th>
-                      <th>Progress</th>
-                      <th style="width: 40px">Label</th>
-                    </tr>
-                  </thead>
-                  <tbody>
-                    <tr>
-                      <td>1.</td>
-                      <td>Update software</td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-danger">55%</span></td>
-                    </tr>
-                    <tr>
-                      <td>2.</td>
-                      <td>Clean database</td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar bg-warning" style="width: 70%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-warning">70%</span></td>
-                    </tr>
-                    <tr>
-                      <td>3.</td>
-                      <td>Cron job running</td>
-                      <td>
-                        <div class="progress progress-xs progress-striped active">
-                          <div class="progress-bar bg-primary" style="width: 30%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-primary">30%</span></td>
-                    </tr>
-                    <tr>
-                      <td>4.</td>
-                      <td>Fix and squish bugs</td>
-                      <td>
-                        <div class="progress progress-xs progress-striped active">
-                          <div class="progress-bar bg-success" style="width: 90%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-success">90%</span></td>
-                    </tr>
-                  </tbody>
-                </table>
-              </div>
-              <!-- /.card-body -->
-              
-            </div>
-            <!-- /.card -->
-
-                <!--/.direct-chat -->
-<!---->
               <!-- /.col -->
+            </div>
             <!-- /.row -->
 
 
@@ -471,10 +418,113 @@
           </div>
           <!-- /.col -->
 
-          
+          <div class="col-md-4">
+            <!-- Info Boxes Style 2 -->
+            <div class="info-box mb-3 bg-warning">
+              <span class="info-box-icon"><i class="fas fa-tag"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Inventory</span>
+                <span class="info-box-number">5,200</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+            <div class="info-box mb-3 bg-success">
+              <span class="info-box-icon"><i class="far fa-heart"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Mentions</span>
+                <span class="info-box-number">92,050</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+            <div class="info-box mb-3 bg-danger">
+              <span class="info-box-icon"><i class="fas fa-cloud-download-alt"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Downloads</span>
+                <span class="info-box-number">114,381</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+            <div class="info-box mb-3 bg-info">
+              <span class="info-box-icon"><i class="far fa-comment"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Direct Messages</span>
+                <span class="info-box-number">163,921</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+
+            <!-- /.info-box -->
+	    <div class="info-box mb-3 bg-info">
+              <span class="info-box-icon"><i class="far fa-comment"></i></span>
+
+              <div class="info-box-content">
+                <span class="info-box-text">Direct Messages</span>
+                <span class="info-box-number">163,921</span>
+              </div>
+              <!-- /.info-box-content -->
+            </div>
+            <!-- /.info-box -->
+            
+            <!-- /.card -->
+
+            <!-- PRODUCT LIST -->
+            
+            <!-- /.card -->
+          </div>
           <!-- /.col -->
         </div>
-          
+          <div class="row">
+            <div class="col-md-12">
+        
+             <div class="card">
+              <div class="card-header border-transparent">
+                <h3 class="card-title">Failed Test-Cases</h3>
+
+                <div class="card-tools">
+                  <button type="button" class="btn btn-tool" data-card-widget="collapse">
+                    <i class="fas fa-minus"></i>
+                  </button>
+                  <button type="button" class="btn btn-tool" data-card-widget="remove">
+                    <i class="fas fa-times"></i>
+                  </button>
+                </div>
+              </div>
+              <!-- /.card-header -->
+              <div class="card-body p-0">
+                <div class="table-responsive">
+                <table id="example1" class="table table-bordered table-hover" style="width:100%">
+                <thead>
+                <tr>
+                  <th>Date</th>
+                  <th>Description</th>
+                  <th>Severity</th>
+                  <th>IpAddress</th>
+                  <th>Hostname</th>
+                  <th>Command</th>
+                  <th>Verdict</th>
+                  <th>Remarks</th>
+                  <th>TestId</th>
+                </tr>
+                </thead> 
+
+                </table>
+                </div>
+                <!-- /.table-responsive -->
+              </div>
+              <!-- /.card-body -->
+              
+              <!-- /.card-footer -->
+            </div>
+           </div>
+          </div>
 
         <!-- /.row -->
       </div><!--/. container-fluid -->
@@ -499,11 +549,10 @@
 <script src="https://cdn.datatables.net/1.10.13/js/jquery.dataTables.min.js"></script>
 
 <script>
- var result = []
+
 $('#datelog').change(function(){
 //Anoop/
-// var result = []
-
+ var result = []
  $.ajax({
             url : "/ajax-post",
             type : "POST",
@@ -513,8 +562,7 @@ $('#datelog').change(function(){
                },
             async: false,
             success: function(json) {
-              //result.push(json);
-              result[0]=json;
+              result.push(json);
             },
             failure: function(json) {
                 alert('Got an error dude: Contact Support Team.!!');
@@ -590,7 +638,7 @@ data1 = pass.toString()
 data2 = total.toString()
 data = '<b>'+data1+'</b>/'+data2 +' [<b>Passed</b>/Total]'
 $('#os_value').html(data)
-$('#os_val_per').width(pass_per)
+$('#os_val_er').width(pass_per)
 
 
 pass = result[0].allnode_passed_TC
@@ -615,139 +663,26 @@ data = '<b>'+data1+'</b>/'+data2 +' [<b>Passed</b>/Total]'
 $('#con_val_per').width(pass_per)
 $('#con_value').html(data)
 
+$('#example1 td').remove()
+var result_data =  ''
+for(let item of result[0].failed_list) {
+ 	result_data +='<tr>';
+        result_data +='<td>'+item.date+'</td>';
+        result_data +='<td>'+item.desc+'</td>';
+        result_data +='<td>'+item.severity+'</td>';
+        result_data +='<td>'+item.ipaddr+'</td>';
+        result_data +='<td>'+item.hostname+'</td>';
+        result_data +='<td>'+item.command+'</td>';
+        result_data +='<td>'+item.verdict+'</td>';
+        result_data +='<td>'+item.remarks+'</td>';
+        result_data +='<td>'+item.test_id+'</td>';
+	result_data +='</tr>';
+}
+$('#example1').append(result_data)
 
-//Total-Testcases href update on selected date
-sel_date = $('#datelog').val()
-$('#date_report1').attr("href","/dbtable_date?date="+sel_date+"&type=1")
-$('#date_report2').attr("href","/dbtable_date?date="+sel_date+"&type=2")
-$('#date_report3').attr("href","/dbtable_date?date="+sel_date+"&type=3")
-$('#date_report4').attr("href","/dbtable_date?date="+sel_date+"&type=4")
-
-});
-
-
- var salesChart
- $('#datelog1').change(function(){
- console.log(result[0])
-
- var compare_result = []
- $.ajax({
-            url : "/ajax-post",
-            type : "POST",
-            dataType: "json",
-            data: { date: $(this).val(),
-                 'csrfmiddlewaretoken': '{{ csrf_token }}',
-               },
-            async: false,
-            success: function(json) {
-              //result.push(json);
-              compare_result[0]=json;
-            },
-            failure: function(json) {
-                alert('Got an error dude: Contact Support Team.!!');
-            }
-        });
-
-
- console.log(compare_result[0])
- var date=$('#datelog').val()
- var new_date = m='<i class="fas fa-square text-primary"></i>' + date
- $('#blue_date').html(new_date)
-
- var date=$('#datelog1').val()
- var new_date = m='<i class="fas fa-square text-gray"></i>' + date
- $('#gray_date').html(new_date)
-
-
-  var pass1 = result[0].passed_TC
-  var fail1 = result[0].failed_TC
-  var fail1_major = result[0].failed_major_TC
-  var fail1_minor = result[0].failed_minor_TC
-  var fail1_cat = result[0].failed_cat_TC
-  var fail1_war = result[0].failed_war_TC
-
-  var pass2 = compare_result[0].passed_TC
-  var fail2 = compare_result[0].failed_TC
-  var fail2_major = compare_result[0].failed_major_TC
-  var fail2_minor = compare_result[0].failed_minor_TC
-  var fail2_cat = compare_result[0].failed_cat_TC
-  var fail2_war = compare_result[0].failed_war_TC
-
-  var ticksStyle = {
-    fontColor: '#495057',
-    fontStyle: 'bold'
-  }
-
-  var mode      = 'index'
-  var intersect = true
-
-  var $salesChart = $('#history-chart')
-  if ( salesChart != null ) {
-  salesChart.destroy();
-  }
-    salesChart  = new Chart($salesChart, {
-    type   : 'bar',
-    data   : {
-      labels  : ['PASS', 'FAIL', 'MAJOR(Fail)', 'MINOR(Fail)', 'WARn(Fail)', 'CATs(Fail)'],
-      datasets: [
-        { 
-          backgroundColor: '#007bff',
-          borderColor    : '#007bff',
-          data           : [pass1,fail1,fail1_major,fail1_minor,fail1_war,fail1_cat]
-        },
-        { 
-          backgroundColor: '#ced4da',
-          borderColor    : '#ced4da',
-          data           : [pass2,fail2,fail2_major,fail2_minor,fail2_war,fail2_cat]
-        }
-      ]
-    },
-    options: {
-      maintainAspectRatio: false,
-      tooltips           : {
-        mode     : mode,
-        intersect: intersect
-      },
-//      hover              : {
-//        mode     : mode,
-//        intersect: intersect
-//      },
-      legend             : {
-        display: false
-      },
-      scales             : {
-        yAxes: [{
-          // display: false,
-          gridLines: {
-            display      : true,
-            lineWidth    : '4px',
-            color        : 'rgba(0, 0, 0, .2)',
-            zeroLineColor: 'transparent'
-          },
-          ticks    : $.extend({
-            beginAtZero: true,
-
-            // Include a dollar sign in the ticks
-            callback: function (value, index, values) {
-              return  value
-            }
-          }, ticksStyle)
-        }],
-        xAxes: [{
-          display  : true,
-          gridLines: {
-            display: false
-          },
-//          ticks    : ticksStyle
-        }]
-      }
-    }
-  });
 
 
 });
-
-
 
 </script>
 
