@@ -9,14 +9,14 @@ import datetime
 
 # Create your views here.
 def index(reqeust):
-    date_list = healthCheck.objects.values("date").distinct()
+    date_list = healthCheck.objects.values("date").distinct().order_by('-date')
     return render(reqeust, 'pages/index.html',{'dates':date_list})
 
 def about(request):
     return render(request, 'pages/about.html')
 
 def index2(request):
-    date_list = healthCheck.objects.values("date").distinct()
+    date_list = healthCheck.objects.values("date").distinct().order_by('-date')
     return render(request, 'pages/index2.html',{'dates':date_list})
 
 
@@ -35,7 +35,7 @@ def loadjsonindb(request):
        test_json = json.loads(text)
 
     #   datet = datetime.now()
-       datet = datetime.date(2020, 1, 20) 
+       datet = datetime.date(2020, 5, 30) 
        for item in test_json:
           ip = item['IPAddress'].strip()
           healthCheck.objects.create(desc=item['Test Description'], severity=item['Severity'], ipaddr=ip, hostname=item['Hostname'], command=item['Command-Executed'], verdict=item['Verdict'], remarks=item['Remarks'],test_id=item['Test ID'],date=datet)
@@ -58,8 +58,8 @@ def dbtable(request):
     return render(request,'dbtable.html', context=data_dict)
 
 def dbtable_latest(request):
-    date_lst = healthCheck.objects.all().values('date').distinct()
-    data = healthCheck.objects.filter(date=date_lst[0]['date'])  #0th index is lastest date
+    date_lst = healthCheck.objects.all().values('date').distinct().order_by('-date')
+    data = healthCheck.objects.filter(date=date_lst[0]['date']) 
     data_dict = {'monitor_records': data , 'date': date_lst[0]['date']}
     return render(request,'dbtable_latest.html', context=data_dict)
 
@@ -78,7 +78,10 @@ def convert_date(date):
     print(date_lt)
     yy = date_lt[1].strip()
     print(yy)
-    mm_dd = date_lt[0].split('.')
+    if '.' in date_lt[0]:
+      mm_dd = date_lt[0].split('.')
+    else:
+     mm_dd = date_lt[0].split(' ')
     print(mm_dd)
     dd = mm_dd[1].strip()
     print(dd)
@@ -149,6 +152,68 @@ def date_wise_start(date):
     report['allnode_failed_TC'] = stat_qs.filter(verdict__contains="Failed", test_id__icontains="ALL-NODE").count()
      
     #report['failed_list'] = list(stat_qs.filter(verdict__contains="Failed").values())
+  
+     # Openstack data
+    report['os_nova_list'] = stat_qs.filter(test_id__icontains="CEE-001", verdict__contains="Failed").count()
+    report['os_nova_hypv'] = stat_qs.filter(test_id__icontains="CEE-002", verdict__contains="Failed").count()
+    report['os_cinder_srv'] = stat_qs.filter(test_id__icontains="CEE-003", verdict__contains="Failed").count()
+    report['os_neutron_agent'] = stat_qs.filter(test_id__icontains="CEE-004", verdict__contains="Failed").count()
+    report['os_nova_srv'] = stat_qs.filter(test_id__icontains="CEE-005", verdict__contains="Failed").count()
+    report['os_glance_image'] = stat_qs.filter(test_id__icontains="CEE-006", verdict__contains="Failed").count()
+    report['os_ceilometer_meter'] = stat_qs.filter(test_id__icontains="CEE-007", verdict__contains="Failed").count()
+    report['os_project_list'] = stat_qs.filter(test_id__icontains="CEE-008", verdict__contains="Failed").count()
+    report['os_srv_list'] = stat_qs.filter(test_id__icontains="CEE-009", verdict__contains="Failed").count()
+    report['os_neutron_net'] = stat_qs.filter(test_id__icontains="CEE-010", verdict__contains="Failed").count()
+
+
+    #service data
+    report['srv_watchmen'] = stat_qs.filter(test_id__icontains="CEE-011", verdict__contains="Failed").count()
+    report['srv_rabbitmq_cls'] = stat_qs.filter(test_id__icontains="CEE-013", verdict__contains="Failed").count()
+    report['srv_rabbitmq_lst'] = stat_qs.filter(test_id__icontains="CEE-014", verdict__contains="Failed").count()
+    report['srv_galera_mysql'] = stat_qs.filter(test_id__icontains="CEE-015", verdict__contains="Failed").count()
+    report['srv_mongodb'] = stat_qs.filter(test_id__icontains="CEE-016", verdict__contains="Failed").count()
+    report['srv_mongodb_rep'] = stat_qs.filter(test_id__icontains="CEE-017", verdict__contains="Failed").count()
+    report['srv_rabbitmg_file'] = stat_qs.filter(test_id__icontains="CEE-018", verdict__contains="Failed").count()
+    report['srv_rest_srv'] = stat_qs.filter(test_id__icontains="SDNC-012", verdict__contains="Failed").count()
+    report['srv_openflow'] = stat_qs.filter(test_id__icontains="SDNC-013", verdict__contains="Failed").count()
+    report['srv_ovsdb'] = stat_qs.filter(test_id__icontains="SDNC-014", verdict__contains="Failed").count()
+    report['srv_odlbgp'] = stat_qs.filter(test_id__icontains="SDNC-015", verdict__contains="Failed").count()
+    
+
+
+    #sdnc
+    report['sdn_dpns'] = stat_qs.filter(test_id__icontains="SDNC-001", verdict__contains="Failed").count()
+    report['sdn_tep'] = stat_qs.filter(test_id__icontains="SDNC-002", verdict__contains="Failed").count()
+    report['sdn_tunnel'] = stat_qs.filter(test_id__icontains="SDNC-003", verdict__contains="Failed").count()
+
+    report['sdn_tunnel_st'] = stat_qs.filter(test_id__icontains="SDNC-004", verdict__contains="Failed").count()
+    report['sdn_tunnel_st_count'] = list(stat_qs.filter(test_id__icontains="SDNC-004").distinct().values('remarks'))
+
+    report['sdn_app_status'] = stat_qs.filter(test_id__icontains="SDNC-005", verdict__contains="Failed").count()
+    report['sdn_app_count'] = list(stat_qs.filter(test_id__icontains="SDNC-005").distinct().values('remarks'))
+
+
+    report['sdn_shard_inv_status'] = stat_qs.filter(test_id__icontains="SDNC-006", verdict__contains="Failed").count()
+    report['sdn_shard_inv_data'] = list(stat_qs.filter(test_id__icontains="SDNC-006").values('remarks'))
+
+    report['sdn_shard_def_status'] = stat_qs.filter(test_id__icontains="SDNC-007", verdict__contains="Failed").count()
+    report['sdn_shard_def_data'] = list(stat_qs.filter(test_id__icontains="SDNC-007").values('remarks'))
+
+    report['sdn_shard_top_status'] = stat_qs.filter(test_id__icontains="SDNC-008", verdict__contains="Failed").count()
+    report['sdn_shard_top_data'] = list(stat_qs.filter(test_id__icontains="SDNC-008").values('remarks'))
+
+    report['sdn_shard_invo_status'] = stat_qs.filter(test_id__icontains="SDNC-009", verdict__contains="Failed").count()
+    report['sdn_shard_invo_data'] = list(stat_qs.filter(test_id__icontains="SDNC-009").values('remarks'))
+
+    report['sdn_shard_defo_status'] = stat_qs.filter(test_id__icontains="SDNC-010", verdict__contains="Failed").count()
+    report['sdn_shard_defo_data'] = list(stat_qs.filter(test_id__icontains="SDNC-010").values('remarks'))
+
+    report['sdn_shard_topo_status'] = stat_qs.filter(test_id__icontains="SDNC-011", verdict__contains="Failed").count()
+    report['sdn_shard_topo_data'] = list(stat_qs.filter(test_id__icontains="SDNC-011").values('remarks'))
+
+    report['sdn_dpn_status']= stat_qs.filter(test_id__icontains="SDNC-016",verdict__contains="Failed").count()
+    report['sdn_dpn_data']= list(stat_qs.filter(test_id__icontains="SDNC-016").values('remarks'))
+   
     
     return report
 
@@ -267,7 +332,7 @@ def dbtable_info(request):
     if  rq_type == "4" : data = healthCheck.objects.filter(date=date, verdict__contains = "Failed", severity__contains="Major") 
 
     data_dict = {'monitor_records': data , 'date': date}
-    return render(request,'dbtable_latest.html', context=data_dict)
+    return render(request,'dbtable_bydate.html', context=data_dict)
 
 
 def dbdata1(request):

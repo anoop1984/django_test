@@ -44,7 +44,7 @@
 
         <div class="row">
           <div class="col-md-6">
-            <div class="card">
+            <div class="card h-200">
               <div class="card-header">
                 <h5 class="card-title">Health Report</h5>
                 <!--div class="card-tools">
@@ -138,7 +138,7 @@
           <!---Adding Histor Char Grap--> 
 
           <div class="col-md-6">
-            <div class="card">
+            <div class="card h-200">
               <div class="card-header">
                 <div class="d-flex justify-content-between">
                   <h3 class="card-title">Comparison</h3>
@@ -269,40 +269,34 @@
                 <!-- DIRECT CHAT -->
                 
             <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">OpenStack Stats</h3>
+              <div class="card-header border-0">
+                <h3 class="card-title">OpenStack Components</h3>
               </div>
 
               <!-- /.card-header -->
               <div class="card-body">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th>Task</th>
-                      <th>Task</th>
-                    </tr>
-                  </thead>
+                <table  class="table" border="0">
                   <tbody>
                     <tr>
                       <td>nova list 
-                       <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>
+                       <i id="nova_list"></i>
                      </td>
-                      <td>nova hypervision <i class="ion ion-thumbsdown" style="font-size:30px;color:red"></i></td>
+                      <td>nova hypervision <i id="nova_hypv"></i></td>
                     </tr>
                     <tr>
-                      <td>cinder service</td>
-                      <td>neutron agent</td>
+                      <td>cinder service<i id="cinder_srv"></i></td>
+                      <td>neutron agent<i id="neutron_agent"></i></td>
                     </tr>
                     <tr>
-                      <td>nova servic</td>
-                      <td>glance image</td>
+                      <td>nova service<i id="nova_srv"></i></td>
+                      <td>glance image<i id="glance"></i></td>
                     </tr>
                     <tr>
-                      <td>ceilometer meter</td>
-                      <td>openstack project</td>
+                      <td>ceilometer meter<i id="ceilometer"></i></td>
+                      <td>openstack project<i id="project"></i></td>
                     </tr>
-                    <tr><td>openstack service</td>
-                       <td>neutron net</td></tr>
+                    <tr><td>openstack service<i id="os_srv"></i></td>
+                       <td>neutron net<i id="neutron_net"></i></td></tr>
                   </tbody>
                 </table>
               </div>
@@ -322,63 +316,36 @@
                 <!-- DIRECT CHAT -->
                 
             <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Bordered Table</h3>
+              <div class="card-header border-0">
+                <h3 class="card-title">Service Components</h3>
               </div>
 
               <!-- /.card-header -->
               <div class="card-body">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th style="width: 10px">#</th>
-                      <th>Task</th>
-                      <th>Progress</th>
-                      <th style="width: 40px">Label</th>
-                    </tr>
-                  </thead>
+                <table class="table ">
                   <tbody>
                     <tr>
-                      <td>1.</td>
-                      <td>Update software</td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-danger">55%</span></td>
+                      <td>watchmen
+                       <i id="srv_watchmen"></i>
+                     </td>
+                      <td>rabbitmq cluster <i id="srv_rabbitmq_cls"></i></td>
                     </tr>
                     <tr>
-                      <td>2.</td>
-                      <td>Clean database</td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar bg-warning" style="width: 70%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-warning">70%</span></td>
+                      <td>rabbitmq list<i id="srv_rabbitmq_lst"></i></td>
+                      <td>galera mysql<i id="srv_galera_mysql"></i></td>
                     </tr>
                     <tr>
-                      <td>3.</td>
-                      <td>Cron job running</td>
-                      <td>
-                        <div class="progress progress-xs progress-striped active">
-                          <div class="progress-bar bg-primary" style="width: 30%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-primary">30%</span></td>
+                      <td>mongoDB <i id="srv_mongodb"></i></td>
+                      <td>monogDB replica<i id="srv_mongodb_rep"></i></td>
                     </tr>
                     <tr>
-                      <td>4.</td>
-                      <td>Fix and squish bugs</td>
-                      <td>
-                        <div class="progress progress-xs progress-striped active">
-                          <div class="progress-bar bg-success" style="width: 90%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-success">90%</span></td>
+                      <td>rabbitmq file<i id="srv_rabbitmg_file"></i></td>
+                      <td>rest<i id="srv_rest_srv"></i></td>
                     </tr>
-                  </tbody>
+                    <tr><td>openflow<i id="srv_openflow"></i></td>
+                       <td>ovsdb<i id="srv_ovsdb"></i></td></tr>
+                    <tr> <td>odlbgp<i id="srv_odlbgp"></i></td></td></tr>
+                  </tbody> 
                 </table>
               </div>
               <!-- /.card-body -->
@@ -395,61 +362,42 @@
                 <!-- DIRECT CHAT -->
                 
             <div class="card">
-              <div class="card-header">
-                <h3 class="card-title">Bordered Table</h3>
+              <div class="card-header border-0">
+                <h3 class="card-title">SDNC Componesnt</h3>
               </div>
 
               <!-- /.card-header -->
               <div class="card-body">
-                <table class="table table-bordered">
-                  <thead>
-                    <tr>
-                      <th style="width: 10px">#</th>
-                      <th>Task</th>
-                      <th>Progress</th>
-                      <th style="width: 40px">Label</th>
-                    </tr>
-                  </thead>
+                <table class="table">
+                  
                   <tbody>
                     <tr>
-                      <td>1.</td>
-                      <td>Update software</td>
                       <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar progress-bar-danger" style="width: 55%"></div>
-                        </div>
+                       <ul>
+                        <li>All DPNS <i id="dpns"></i></li>
+                        <li>TEP Config <i id="tep"></i></li>
+                        <li>TEP Tunnel <i id="tep_tunnel"></i></li>
+                        <li>No. of Tunnels: <solid id="tunnel_count">56</solid> <i id="tunnel_status"></i> </li>
+                        <li>Operationl Count: <i id="op_count">56</i> <i id="op_status"> </i></li>
+                        <li>Shard Leader </li>
+                        <ul>
+			   <li>Inventory Config <i id="inv_conf">cic1</i> <i id="inv_conf_status"></i></li>
+			   <li>Default Config <i id="def_conf">cic1</i> <i id="def_conf_status"></i></li>
+			   <li>Topology Config <i id="top_conf">cic1</i> <i id="top_conf_status"></i></li>
+			   <li>Inventory Operation <i id="invo_conf">cic1</i> <i id="invo_conf_status"></i></li>
+			   <li>Default Operation<i id="defo_conf">cic1</i> <i id="defo_conf_status"></i> </li>
+			   <li>Topology Operation<i id="topo_conf">cic1</i> <i id="topo_conf_status"></i></li>
+ 			</ul>
+			
+			<li>DPN Count
+			<ul>
+			   <li>CIC-1 : <i id="cic1_count">1</i> <i id="cic1_status"></i> </li>
+			   <li>CIC-1 : <i id="cic2_count">2</i> <i id="cic2_status"></i> </li>
+			   <li>CIC-1 : <i id="cic3_count">3</i> <i id="cic3_status"></i> </li>
+			</ul>
+			</li>
                       </td>
-                      <td><span class="badge bg-danger">55%</span></td>
-                    </tr>
-                    <tr>
-                      <td>2.</td>
-                      <td>Clean database</td>
-                      <td>
-                        <div class="progress progress-xs">
-                          <div class="progress-bar bg-warning" style="width: 70%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-warning">70%</span></td>
-                    </tr>
-                    <tr>
-                      <td>3.</td>
-                      <td>Cron job running</td>
-                      <td>
-                        <div class="progress progress-xs progress-striped active">
-                          <div class="progress-bar bg-primary" style="width: 30%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-primary">30%</span></td>
-                    </tr>
-                    <tr>
-                      <td>4.</td>
-                      <td>Fix and squish bugs</td>
-                      <td>
-                        <div class="progress progress-xs progress-striped active">
-                          <div class="progress-bar bg-success" style="width: 90%"></div>
-                        </div>
-                      </td>
-                      <td><span class="badge bg-success">90%</span></td>
+                      
                     </tr>
                   </tbody>
                 </table>
@@ -622,6 +570,32 @@ $('#date_report1').attr("href","/dbtable_date?date="+sel_date+"&type=1")
 $('#date_report2').attr("href","/dbtable_date?date="+sel_date+"&type=2")
 $('#date_report3').attr("href","/dbtable_date?date="+sel_date+"&type=3")
 $('#date_report4').attr("href","/dbtable_date?date="+sel_date+"&type=4")
+
+
+
+if ( result[0].os_nova_list == 0 ) { $('#nova_list').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#nova_list').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
+if ( result[0].os_nova_hypv == 0 ) { $('#nova_hypv').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#nova_hypv').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
+if ( result[0].os_cinder_srv == 0 ) { $('#cinder_srv').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#cinder_srv').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
+if ( result[0].os_neutron_agent == 0 ) { $('#neutron_agent').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#neutron_agent').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
+if ( result[0].os_nova_srv == 0 ) { $('#nova_srv').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#nova_srv').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
+if ( result[0].os_glance_image == 0 ) { $('#glance').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#glance').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
+if ( result[0].os_ceilometer_meter == 0 ) { $('#ceilometer').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#ceilometer').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
+if ( result[0].os_project_list == 0 ) { $('#project').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#project').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
+if ( result[0].os_srv_list == 0 ) { $('#os_srv').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#os_srv').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
+if ( result[0].os_neutron_net == 0 ) { $('#neutron_net').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#neutron_net').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
+
+
+if ( result[0].srv_watchmen== 0 ) { $('#srv_watchmen').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#srv_watchmen').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
+if ( result[0].srv_rabbitmq_cls== 0 ) { $('#srv_rabbitmq_cls').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#srv_rabbitmq_cls').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
+if ( result[0].srv_rabbitmq_lst== 0 ) { $('#srv_rabbitmq_lst').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#srv_rabbitmq_lst').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
+if ( result[0].srv_galera_mysql== 0 ) { $('#srv_galera_mysql').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#srv_galera_mysql').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
+if ( result[0].srv_mongodb== 0 ) { $('#srv_mongodb').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#srv_mongodb').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
+if ( result[0].srv_mongodb_rep== 0 ) { $('#srv_mongodb_rep').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#srv_mongodb_rep').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
+if ( result[0].srv_rabbitmg_file== 0 ) { $('#srv_rabbitmg_file').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#srv_rabbitmg_file').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
+if ( result[0].srv_rest_srv== 0 ) { $('#srv_rest_srv').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#srv_rest_srv').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
+if ( result[0].srv_openflow == 0 ) { $('#srv_openflow').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#srv_openflow').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
+if ( result[0].srv_ovsdb== 0 ) { $('#srv_ovsdb').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#srv_ovsdb').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
+if ( result[0].srv_odlbgp== 0 ) { $('#srv_odlbgp').html(' <i class="ion ion-thumbsup" style="font-size:30px;color:green"></i>') } else {$('#srv_odlbgp').html('<i class="ion ion-thumbsdown" style="font-size:30px;color:red">') }
 
 });
 
