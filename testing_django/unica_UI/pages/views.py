@@ -187,29 +187,38 @@ def date_wise_start(date):
     report['sdn_tunnel'] = stat_qs.filter(test_id__icontains="SDNC-003", verdict__contains="Failed").count()
 
     report['sdn_tunnel_st'] = stat_qs.filter(test_id__icontains="SDNC-004", verdict__contains="Failed").count()
-    report['sdn_tunnel_st_count'] = list(stat_qs.filter(test_id__icontains="SDNC-004").distinct().values('remarks'))
+
+    temp = list(stat_qs.filter(test_id__icontains="SDNC-004").distinct().values('remarks'))
+    report['sdn_tunnel_st_count'] = [int(s) for s in temp[0]['remarks'].split() if s.isdigit()][-1] 
 
     report['sdn_app_status'] = stat_qs.filter(test_id__icontains="SDNC-005", verdict__contains="Failed").count()
-    report['sdn_app_count'] = list(stat_qs.filter(test_id__icontains="SDNC-005").distinct().values('remarks'))
+    temp = list(stat_qs.filter(test_id__icontains="SDNC-005").distinct().values('remarks'))
+    report['sdn_app_count'] = temp[0]['remarks'].split('=')[1]
 
 
     report['sdn_shard_inv_status'] = stat_qs.filter(test_id__icontains="SDNC-006", verdict__contains="Failed").count()
-    report['sdn_shard_inv_data'] = list(stat_qs.filter(test_id__icontains="SDNC-006").values('remarks'))
+    temp = list(stat_qs.filter(test_id__icontains="SDNC-006").values('remarks'))
+    report['sdn_shard_inv_data'] = temp[0]['remarks'].strip().split()[0] 
 
     report['sdn_shard_def_status'] = stat_qs.filter(test_id__icontains="SDNC-007", verdict__contains="Failed").count()
-    report['sdn_shard_def_data'] = list(stat_qs.filter(test_id__icontains="SDNC-007").values('remarks'))
+    temp = list(stat_qs.filter(test_id__icontains="SDNC-007").values('remarks'))
+    report['sdn_shard_def_data'] = temp[0]['remarks'].strip().split()[0] 
 
     report['sdn_shard_top_status'] = stat_qs.filter(test_id__icontains="SDNC-008", verdict__contains="Failed").count()
-    report['sdn_shard_top_data'] = list(stat_qs.filter(test_id__icontains="SDNC-008").values('remarks'))
+    temp = list(stat_qs.filter(test_id__icontains="SDNC-008").values('remarks'))
+    report['sdn_shard_top_data'] = temp[0]['remarks'].strip().split()[0] 
 
     report['sdn_shard_invo_status'] = stat_qs.filter(test_id__icontains="SDNC-009", verdict__contains="Failed").count()
-    report['sdn_shard_invo_data'] = list(stat_qs.filter(test_id__icontains="SDNC-009").values('remarks'))
+    temp = list(stat_qs.filter(test_id__icontains="SDNC-009").values('remarks'))
+    report['sdn_shard_invo_data'] = temp[0]['remarks'].strip().split()[0] 
 
     report['sdn_shard_defo_status'] = stat_qs.filter(test_id__icontains="SDNC-010", verdict__contains="Failed").count()
-    report['sdn_shard_defo_data'] = list(stat_qs.filter(test_id__icontains="SDNC-010").values('remarks'))
+    temp = list(stat_qs.filter(test_id__icontains="SDNC-010").values('remarks'))
+    report['sdn_shard_defo_data'] = temp[0]['remarks'].strip().split()[0] 
 
     report['sdn_shard_topo_status'] = stat_qs.filter(test_id__icontains="SDNC-011", verdict__contains="Failed").count()
-    report['sdn_shard_topo_data'] = list(stat_qs.filter(test_id__icontains="SDNC-011").values('remarks'))
+    temp = list(stat_qs.filter(test_id__icontains="SDNC-011").values('remarks'))
+    report['sdn_shard_topo_data'] = temp[0]['remarks'].strip().split()[0]
 
     report['sdn_dpn_status']= stat_qs.filter(test_id__icontains="SDNC-016",verdict__contains="Failed").count()
     report['sdn_dpn_data']= list(stat_qs.filter(test_id__icontains="SDNC-016").values('remarks'))
