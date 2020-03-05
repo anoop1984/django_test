@@ -30,7 +30,12 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 
-
+<style>
+table.dataTable thead tr th {
+    word-wrap: break-word;
+    word-break: break-all;
+}
+</style>
 
 </head>
 <body class="hold-transition sidebar-mini">
@@ -87,7 +92,7 @@
                   <th>IpAddress</th>
                   <th>Hostname</th>
                   <th>Command</th>
-                  <th>Verdict</th>
+                  <th style="width: 20%">Verdict</th>
                   <th>Remarks</th>
                   <th>TestId</th>
                 </tr>
@@ -178,6 +183,7 @@
 $(document).ready(function() {
     $('#example1').DataTable( {
         "scrollX": true,
+        autoWidth: false,
         initComplete: function () {
             this.api().columns().every( function () {
                 var column = this;
