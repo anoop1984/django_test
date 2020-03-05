@@ -48,21 +48,6 @@
   <!-- Content Wrapper. Contains page content -->
   <div class="content-wrapper">
     <!-- Content Header (Page header) -->
-    <section class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1><span class="badge badge-success">Heath Checks DataTable</span></h1>
-          </div>
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="/pages">Home</a></li>
-              <!--li class="breadcrumb-item active">DataTables</li-->
-            </ol>
-          </div>
-        </div>
-      </div><!-- /.container-fluid -->
-    </section>
 
     <!-- Main content -->
     <section class="content">
@@ -72,7 +57,7 @@
 
           <div class="card ">
             <div class="card-header">
-              <h3 class="card-title2">Health-Check Report:  <span class="badge badge-success">{{ date }}</span></h3>
+              <h3 class="card-title2">Health-Check Report:  {{ date }}</h3>
             </div>
             <!-- /.card-header -->
             <div class="card-body col-md-12">
@@ -82,7 +67,7 @@
               <table id="example1" class="table table-bordered table-hover" >
                 <thead>
                 <tr>
-                  <th>Date</th>
+                  <th>TestId</th>
                   <th>Description</th>
                   <th>Severity</th>
                   <th>IpAddress</th>
@@ -90,13 +75,12 @@
                   <th>Command</th>
                   <th>Verdict</th>
                   <th>Remarks</th>
-                  <th>TestId</th>
                 </tr>
                 </thead>
                 <tbody>
                 <tr>
               {% for it in monitor_records %}
-                 <td>{{ it.date }}</td>
+                 <td>{{ it.test_id }}</td>
                  <td>{{ it.desc }}</td>
                  <td>{{ it.severity }}</td>
                  <td>{{ it.ipaddr }}</td>
@@ -108,13 +92,12 @@
                  <td class="badge badge-danger">{{ it.verdict}}</td>
                  {% endif %}
                  <td>{{ it.remarks }}</td>
-                 <td>{{ it.test_id }}</td>
                 </tr>
              {% endfor %}
                 </tbody>
                 <tfoot>
                 <tr>
-                  <th>Date</th>
+                  <th>TestId</th>
                   <th>Description</th>
                   <th>Severity</th>
                   <th>IpAddress</th>
@@ -122,7 +105,6 @@
                   <th>Command</th>
                   <th>Verdict</th>
                   <th>Remarks</th>
-                  <th>TestId</th>
                 </tr>
                 </tfoot>
               </table>
@@ -164,7 +146,6 @@
 
 <!-- page script -->
 <script>
-/*
   $(function () {
     $("#example1").DataTable({
        fixedHeader: {
@@ -173,36 +154,6 @@
        }
     });
   });
-
-*/
-$(document).ready(function() {
-    $('#example1').DataTable( {
-        "scrollX": true,
-        initComplete: function () {
-            this.api().columns().every( function () {
-                var column = this;
-                console.log(this);
-                var select = $('<select><option value=""></option></select>')
-                    .appendTo( $(column.footer()).empty() )
-                    .on( 'change', function () {
-                        var val = $.fn.dataTable.util.escapeRegex(
-                            $(this).val()
-                        );
- 
-                        column
-                            .search( val ? '^'+val+'$' : '', true, false )
-                            .draw();
-                    } );
- 
-                column.data().unique().sort().each( function ( d, j ) {
-                    select.append( '<option value="'+d+'">'+d+'</option>' )
-                } );
-            } );
-        }
-    } );
-
-
-} );
 
 </script>
 </body>

@@ -105,13 +105,13 @@ def convert_date(date):
    
     
     
-def date_wise_start(date):
+def date_wise_start(date,date_str):
     stat_qs = healthCheck.objects.filter(date=date)
    
 
     report={}
     # date
-    report['date'] = date
+    report['date'] = date_str
     #total test cases
     report['total_TC'] = stat_qs.count()
     #total passed testcases
@@ -307,7 +307,7 @@ def ajax(request):
     
     date1=convert_date(date)  
     print("date=",date1)
-    response = date_wise_start(date1)
+    response = date_wise_start(date1,date)
     #print(response)
   
     #print("hahaha: ",type(date1))
@@ -401,17 +401,18 @@ def refine_result(list_of_dict):
 
 def dbtable_info(request):
     date = request.GET['date']
+    date2=date
     rq_type = request.GET['type']
     print("date=",date)
     print(rq_type)
     date = convert_date(date)
 
-    if  rq_type == "1" : data = healthCheck.objects.filter(date=date) 
-    if  rq_type == "2" : data = healthCheck.objects.filter(date=date, verdict__contains = "Passed") 
-    if  rq_type == "3" : data = healthCheck.objects.filter(date=date, verdict__contains = "Failed") 
-    if  rq_type == "4" : data = healthCheck.objects.filter(date=date, verdict__contains = "Failed", severity__contains="Major") 
+    if  rq_type == "1" : data = healthCheck.objects.filter(date=date); info="All Testcases"
+    if  rq_type == "2" : data = healthCheck.objects.filter(date=date, verdict__contains = "Passed");  info="All Passed"
+    if  rq_type == "3" : data = healthCheck.objects.filter(date=date, verdict__contains = "Failed"); info="All Failed"
+    if  rq_type == "4" : data = healthCheck.objects.filter(date=date, verdict__contains = "Failed", severity__contains="Major"); info="All Failed Major"
 
-    data_dict = {'monitor_records': data , 'date': date}
+    data_dict = {'monitor_records': data , 'date': date2, 'info': info}
     return render(request,'dbtable_bydate.html', context=data_dict)
 
 
