@@ -10,20 +10,21 @@
     <!-- Content Header (Page header) -->
     <div class="content-header">
       <div class="container-fluid">
-        <div class="row mb-0">
+        <div class="row mb-2">
           <div class="col-sm-6">
             <h1 class="m-0 text-dark">UNICA Healthcheck</h1>
           </div><!-- /.col -->
           <div class="col-sm-6">
             <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item active"><h1 class="m-0 text-dark">Select Date &ensp;</h1></li>
-                <select id="datelog" class="form-control" style="width:250px">
-                  {% if dates %}
-                  {% for date in dates %}
-                     <option value="{{ date.date }}">{{ date.date }}</option>
-                  {% endfor %}
-               {% endif %}
-            </select>
+              <li class="breadcrumb-item"><a href="#">Home</a></li>
+              <li class="breadcrumb-item active">UNICA Healthcheck</li>
+                <select id="datelog" class="form-control">
+         	{% if dates %}
+        	{% for date in dates %}
+        	<option value="{{ date.date }}">{{ date.date }}</option>
+        	{% endfor %}
+        	{% endif %}
+               </select>
               
             </ol>
           </div><!-- /.col -->
@@ -35,9 +36,12 @@
     <!-- Main content -->
     <section class="content">
 
+     <div class="row">
+      <div class="container-fluid">
+        <!-- Info boxes -->
+       <!-- info box deleted--> 
+        <!-- /.row -->
 
-       <div class="container-fluid">
-<!--1st Row starts-->     
         <div class="row">
           <div class="col-md-6">
             <div class="card h-100">
@@ -68,23 +72,20 @@
               <div class="card-body">
                 <div class="row">
                   <div class="col-md-8">
+                    <p class="text-center">
                       <strong id="date">--</strong>
+                    </p>
 
                     <div class="chart">
                       <!-- Sales Chart Canvas -->
-                      <canvas id="reportChart" height="300" style="height: 300px;"></canvas>
+                      <canvas id="reportChart" height="250" style="height: 250px;"></canvas>
                     </div>
                     <!-- /.chart-responsive -->
-                <div class="d-flex flex-row justify-content-end">
-                  <span class="mr-2" id="log_link">
-                    <a href="/media/logs/log.json" class="fas fa-square text-primary">Logs</a> 
-                  </span>
-                </div>
                   </div>
                   <!-- /.col -->
                   <div class="col-md-4">
                     <p class="text-center">
-                      <strong>Unica Components</strong>
+                      <strong>Stats</strong>
                     </p>
 
                     <div class="progress-group">
@@ -132,20 +133,21 @@
             </div>
             <!-- /.card -->
           </div>
-<!---End Pie Graph --->
 
-<!---Adding Histor Char Graph--> 
+
+          <!---Adding Histor Char Grap--> 
+
           <div class="col-md-6">
             <div class="card h-100">
               <div class="card-header">
                 <div class="d-flex justify-content-between">
                   <h3 class="card-title">Comparison</h3>
-                <select id="datelog1" class="form-control" style="width:150px; height:32px;">
-                  {% if dates %}
-                     {% for date in dates %}
-                        <option value="{{ date.date }}">{{ date.date }}</option>
-                     {% endfor %}
-                  {% endif %}
+                 <select id="datelog1" class="form-control" style="width:150px; height:32px;">
+                {% if dates %}
+                {% for date in dates %}
+                <option value="{{ date.date }}">{{ date.date }}</option>
+                {% endfor %}
+                {% endif %}
                </select>
                 </div> 
               </div>
@@ -156,6 +158,7 @@
                   </p>
                   <p class="ml-auto d-flex flex-column text-right">
                     
+                    <span class="text-muted">Data</span>
                   </p>
                 </div>
                 <!-- /.d-flex -->
@@ -180,13 +183,13 @@
 
             
           </div>   
-<!---End Histor Char Grap--> 
+          <!---End Histor Char Grap--> 
           <!-- /.col -->
         </div>
-<!-- 1.row ended-->
+        <!-- /.row -->
 
 
-<!---2nd row starts-->
+<!---unica-->
 
         <div class="row">
           <div class="col-lg-3 col-6">
@@ -253,165 +256,280 @@
           <!-- ./col -->
         </div>
         <!-- /.row -->
-<!---2nd Row ends-->
+<!---unica-->
 
-<!---3rd Row starts-->
-         <div class="row">
-
-             <div class="col-md-4">             
-            <div class="card h-100">
-               <div class="card-header border-0">
-                  <h3 class="card-title">OpenStack Components</h3>
-               </div>
-
-               <!-- /.card-header -->
-               <div class="card-body table-responsive p-0" >
-               <table  class="table table-striped table-hover">
-               <!--table  class="table table-striped table-valign-middle"-->
-                  <tbody>
-                     <tr>
-                       <td><i id="nova_list"></i>&ensp;Nova List</td>
-                       <td><i id="nova_hypv"></i>&ensp;Nova Hypervisor </td>
-                     </tr>
-                     <tr>
-                       <td><i id="cinder_srv"></i>&ensp;Cinder Service </td>
-                       <td><i id="neutron_agent"></i>&ensp;Neutron Agent </td>
-                     </tr>
-                     <tr>
-                        <td><i id="nova_srv"></i>&ensp;Nova Service </td>
-                        <td><i id="glance"></i>&ensp;Glance Image </td>
-                     </tr>
-                     <tr>
-                        <td><i id="ceilometer"></i>&ensp;Ceilometer Meter </td>
-                        <td><i id="project"></i>&ensp;Openstack Project </td>
-                     </tr>
-                     <tr>
-                        <td><i id="os_srv"></i>&ensp;Openstack Service </td>
-                        <td><i id="neutron_net"></i>&ensp;Neutron Net </td>
-                     </tr>
-                  </tbody>
-               </table>
-                </div>
-              <!-- /.card-body -->
-              
-            </div>
+        <!-- Main row -->
+          <!-- Left col -->
+            <!-- MAP & BOX PANE -->
+            
             <!-- /.card -->
-         </div>
-
-
-
-<!--start-->
-             <div class="col-md-4">               
+            <div class="row">
+<!--Start-->
+             <div class="col-md-4">
+                <!-- DIRECT CHAT -->
+                
             <div class="card h-100">
-               <div class="card-header border-0" "text-center bg-dark text-white">
-               <div class="d-flex align-items-center">
-                  <h3 class="card-title">Service Components</h3>
-               </div>
-               </div>
+              <div class="card-header border-0">
+                <h3 class="card-title">OpenStack Components</h3>
+              </div>
 
               <!-- /.card-header -->
-               <div class="card-body table-responsive p-0">
-                  <table class="table table-striped table-valign-middle">  
-                     <tbody>
-                        <tr>
-                          <td><i id="srv_watchmen"></i>&ensp;Watchmen </td>
-                          <td><i id="srv_rabbitmq_cls"></i>&ensp;Rabbitmq Cluster </td>
-                        </tr>
-                        <tr>
-                           <td><i id="srv_rabbitmq_lst"></i>&ensp;Rabbitmq List </td>
-                           <td><i id="srv_galera_mysql"></i>&ensp;Galera Mysql </td>
-                        </tr> 
-                        <tr>
-                           <td><i id="srv_mongodb"></i>&ensp;MongoDB Service </td>
-                           <td><i id="srv_mongodb_rep"></i>&ensp;MonogDB Replica </td>
-                        </tr>
-                        <tr>
-                           <td><i id="srv_rabbitmg_file"></i>&ensp;Rabbitmq File </td>
-                           <td><i id="srv_rest_srv"></i>&ensp;Rest Service </td>
-                        </tr>
-                        <tr>
-                           <td><i id="srv_openflow"></i>&ensp;OpenFlow </td>
-                           <td><i id="srv_ovsdb"></i>&ensp;OVSDB </td>
-                        </tr>
-                        <tr>
-                           <td><i id="srv_odlbgp"></i>&ensp;ODLBGP </td>
-                           <td></td>
-                        </tr>
-                     </tbody> 
-                  </table>
-               </div>
-              <!-- /.card-body -->
-              
-            </div>
-            <!-- /.card -->
-
-            </div>
-<!--end-->
-
-
-         <div class="col-md-4">
-            <div class="card h-100">
-               <div class="card-header border-0">
-                  <h3 class="card-title">SDNC Componesnt</h3>
-               </div>
-
-            <!-- /.card-header -->
               <div class="card-body table-responsive p-0">
-               <table class="table table-striped table-valign-middle">
+                <table  class="table table-striped table-valign-middle">
+		 <thead>
+                  <tr>
+                    <th>Task</th>
+                    <th>Status</th>
+                  </tr>
+                  </thead>
                   <tbody>
-                     <tr>
-                        <td><i id="dpns"></i>&ensp;<b>DPN Count:</b></td>
-                        <td><b id="cic1_count"></b>&ensp;<b id="cic2_count"></b>&ensp;<b id="cic3_count"></b></td>
-                     </tr>
-                     <!--tr>
-                        <td><i id="dpns"></i>&ensp;All DPNS </td>
-                        <td><i id="tep"></i>&ensp;TEP Config </td> 
-			<td><i id="tep_tunnel"></i>&ensp;TEP Tunnel </td>
-                     </tr-->
-                     <tr>
-			<td><i id="tunnel_status"></i>&ensp;<b>TEP COUNT:</b></td>
-                        <td><b id="tunnel_count">-</b></td>
-                     </tr>
-                     <tr>
-                        <td><i id="op_status"> </i>&ensp;<b>Operationl Count:</td>
-                        <td> <b id="op_count">-</b></td>
-                     </tr>
-                     <tr>
-			<td><b>Shard Leader: </b></td>
-                        <td></td> 
-                     </tr>
-                     <tr> 
-			<td><i id="inv_conf_status"></i>&ensp;Inventory Config:&ensp; <b id="inv_conf">-</b></td>
-                        <td><i id="def_conf_status"></i>&ensp;Default Config:&ensp;  <b id="def_conf">-</b></td>			
-                     </tr>
-                     <tr>
-		       <td><i id="top_conf_status"></i>&ensp;Topology Config:&ensp; <b id="top_conf">-</b> </td> 
-                       <td><i id="invo_conf_status"></i>&ensp;Inventory Operation:&ensp; <b id="invo_conf">-</b></td>
-                     </tr>
-                     <tr>
-			<td> <i id="defo_conf_status"></i>&ensp;Default Operation: &ensp; <b id="defo_conf">-</b></td> 
-                        <td> <i id="topo_conf_status"></i>&ensp;Topology Operation:&ensp; <b id="topo_conf">-</b></td>
-                     </tr>
-                     
+                    <tr>
+                      <td>Nova List</td>
+                      <td> <i id="nova_list"></i></td>
+                    </tr>
+                    <tr>
+                      <td>Nova Hypervisor</td>
+	              <td> <i id="nova_hypv"></i></td>
+                    </tr>
+                    <tr>
+                      <td>Cinder Service</td>
+                      <td><i id="cinder_srv"></i></td>
+                    </tr>
+                    <tr>
+                      <td>Neutron Agent</td>
+		      <td><i id="neutron_agent"></i></td>
+                    </tr>
+                    <tr>
+                      <td>Nova Service</td>
+                      <td><i id="nova_srv"></i></td>
+                    </tr>
+		    <tr>
+                      <td>Glance Image</td>
+		      <td><i id="glance"></i></td>
+                    </tr>
+                    <tr>
+                      <td>Ceilometer Meter</td>
+			<td><i id="ceilometer"></i></td>
+		    </tr>
+ 		    <tr>
+                      <td>Openstack Project</td>
+			<td><i id="project"></i></td>
+                    </tr>
+                    <tr>
+			<td>Openstack Service</td>
+			<td><i id="os_srv"></i></td>
+ 		    </tr>
+ 		    <tr>
+                       <td>Neutron Net</td>
+			<td><i id="neutron_net"></i></td>
+		    </tr>
                   </tbody>
-               </table>
+                </table>
               </div>
               <!-- /.card-body -->
               
             </div>
             <!-- /.card -->
 
-         </div>
+                <!--/.direct-chat -->
+              </div>
+
+<!--End-->
+              <!-- /.col -->
+
+<!--start-->
+              <div class="col-md-4">
+                <!-- DIRECT CHAT -->
+                
+            <div class="card h-100">
+              <div class="card-header border-0">
+                <h3 class="card-title">Service Components</h3>
+              </div>
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-striped table-valign-middle">  
+                  <thead>
+                  <tr>
+                    <th>Task</th>
+                    <th>Status</th>
+                  </tr>
+                  </thead>
+                  <tbody>
+                    <tr>
+                      <td>Watchmen</td>
+                      <td> <i id="srv_watchmen"></i></td>
+                    </tr>
+		    <tr>
+                      <td>Rabbitmq Cluster</td>
+		      <td> <i id="srv_rabbitmq_cls"></i></td>
+                    </tr>
+                    <tr>
+                      <td>Rabbitmq List</td>
+		      <td><i id="srv_rabbitmq_lst"></i></td>
+		    </tr> 
+		    <tr>
+                      <td>Galera Mysql</td>
+		      <td><i id="srv_galera_mysql"></i></td>
+                    </tr>
+                    <tr>
+                      <td>MongoDB Service</td>
+		      <td> <i id="srv_mongodb"></i></td>
+		    </tr>
+		    <tr>
+                      <td>MonogDB Replica</td>
+		      <td><i id="srv_mongodb_rep"></i></td>
+                    </tr>
+                    <tr>
+                      <td>Rabbitmq File</td>
+		      <td><i id="srv_rabbitmg_file"></i></td>
+		    </tr>
+		    <tr>
+                      <td>Rest Service</td>
+		      <td><i id="srv_rest_srv"></i></td>
+                    </tr>
+                    <tr>
+		      <td>OpenFlow</td>
+		      <td><i id="srv_openflow"></i></td>
+		    </tr>
+                    <tr>		
+                       <td>OVSDB</td>
+		       <td><i id="srv_ovsdb"></i></td>
+		    </tr>
+                    <tr>
+		        <td>ODLBGP</td>
+			<td><i id="srv_odlbgp"></i></td>
+		    </tr>
+                  </tbody> 
+                </table>
+              </div>
+              <!-- /.card-body -->
+              
+            </div>
+            <!-- /.card -->
+
+                <!--/.direct-chat -->
+              </div>
+<!--end-->
+
+<!---->
+           <div class="col-md-4">
+                <!-- DIRECT CHAT -->
+                
+            <div class="card h-100">
+              <div class="card-header border-0">
+                <h3 class="card-title">SDNC Componesnt</h3>
+              </div>
+
+              <!-- /.card-header -->
+              <div class="card-body table-responsive p-0">
+                <table class="table table-striped table-valign-middle">
+                 <thead>
+                  <tr>
+                    <th>Task</th>
+                    <th>Status</th>
+                    <th></th>
+                  </tr>
+                  </thead> 
+                  <tbody>
+                    <tr>
+                        <td>All DPNS</td>
+			<td> <i id="dpns"></i></td>
+			<td></td>
+		    </tr>
+                    <tr>
+                        <td>TEP Config</td> 
+			<td><i id="tep"></i></td>
+			<td></td>
+		    </tr>
+		    <tr>
+                        <td>TEP Tunnel</td>
+			<td> <i id="tep_tunnel"></i></td>
+			<td></td>
+		    </tr>
+		    <tr>
+                        <td>No. of Tunnels: </td>
+			<td><i id="tunnel_status"></i> </td>
+			<td> <b id="tunnel_count">-</b></td>
+		    </tr>
+		    <tr>
+                        <td>Operationl Count:</td>
+			<td><i id="op_status"> </i></td>
+			<td> <b id="op_count">-</b> </td>
+		    </tr>
+		    <tr>
+                        <td>Shard Leader </td>
+                        <td><i id="inv_conf_status"></i></td>
+			<td>Inventory Config: <b id="inv_conf">-</b> </td>
+   		    </tr>
+		    <tr>
+			<td></td>
+                        <td><i id="def_conf_status"></i></td>
+			<td>Default Config: <b id="def_conf">-</b></td> 
+		    </tr>
+		    <tr>
+			<td></td>
+                        <td><i id="top_conf_status"></i></td>
+			<td>Topology Config: <b id="top_conf">-</b> </td>
+		    </tr>
+		    <tr>
+			<td></td>
+                        <td><i id="invo_conf_status"></i></td>
+			<td>Inventory Operation: <b id="invo_conf">-</b></td>
+  		    </tr>
+		    <tr>
+			<td></td>
+                        <td><i id="defo_conf_status"></i> </td>
+			<td>Default Operation: <b id="defo_conf">-</b></td> 
+		    </tr>
+		    <tr>
+			<td></td>
+                        <td><i id="topo_conf_status"></i></td>
+			<td>Topology Operation: <b id="topo_conf">-</b></td>
+                    </tr>
+		    <tr>
+                        <td>DPN Count</td>
+                        <td> <i id="cic1_status"></i> </td>
+			<td>CIC-1 : <b id="cic1_count"></b></td>
+		    </tr>
+		    <tr>
+			<td></td>
+                        <td><i id="cic2_status"></i> </td>
+			<td>CIC-2 : <b id="cic2_count"></b></td>
+		    </tr>
+		    <tr>
+			<td></td>
+                        <td><i id="cic3_status"></i> </td>
+			<td>CIC-3 : <b id="cic3_count"></b></td>
+		    </tr>
+
+                  </tbody>
+                </table>
+              </div>
+              <!-- /.card-body -->
+              
+            </div>
+            <!-- /.card -->
+
+                <!--/.direct-chat -->
+<!---->
+              <!-- /.col -->
+            <!-- /.row -->
+
+
+            <!-- TABLE: LATEST ORDERS -->
+            
+            <!-- /.card -->
+          </div>
           <!-- /.col -->
 
           
-
+          <!-- /.col -->
         </div>
- <!--3rdRow Ends-->         
+          
 
-        
-      </div>
-     <!--/. container-fluid -->
+        <!-- /.row -->
+      </div><!--/. container-fluid -->
     </section>
     <!-- /.content -->
   </div>
@@ -755,5 +873,5 @@
 
 </script>
 
-{% endblock %}
 
+{% endblock %}

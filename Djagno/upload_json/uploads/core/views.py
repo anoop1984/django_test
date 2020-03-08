@@ -27,10 +27,11 @@ def simple_upload(request):
 def model_form_upload(request):
     if request.method == 'POST':
         form = DocumentForm(request.POST, request.FILES)
-        u_file = request.FILES['file']            
-        extension = u_file.split(".")[1].lower()
-        if not 'json' is extension:
-          return redirect('home')
+        print(form)
+        #u_file = request.FILES['file']            
+        #extension = u_file.split(".")[1].lower()
+        #if not 'json' is extension:
+        #  return redirect('home')
 
         if form.is_valid():
             form.save()

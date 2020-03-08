@@ -16,6 +16,8 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path, include
 from pages import views
+from django.conf import settings
+from django.conf.urls.static import static
 
 urlpatterns = [
     path('pages/', include('pages.urls') ),
@@ -23,6 +25,7 @@ urlpatterns = [
     path('dbtable', views.dbtable),
     path('dbtable_latest', views.dbtable_latest),
     path('dbtable_date',views.dbtable_info),
+    path('logfile',views.logfile),
 
     #path('ajax', views.ajax),
     path('ajax', views.dbdata),
@@ -31,3 +34,4 @@ urlpatterns = [
 
 
 ]
+urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

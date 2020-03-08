@@ -23,3 +23,8 @@ class healthCheck(models.Model):
     test_id =          models.CharField(max_length = 100) 
 #    timestamp =       models.DateTimeField(auto_now_add=True)
     date =            models.DateField()
+
+
+class Logfile(models.Model):
+    logfile = models.FileField(upload_to='logs/')
+    uploaded_at = models.DateField(primary_key=True)

@@ -2,6 +2,8 @@ from django.shortcuts import render
 from django.http import HttpResponse
 
 from . models import healthCheck
+from . models import Logfile 
+from . forms import LogfileForm
 
 import json
 from django.http import JsonResponse
@@ -28,15 +30,18 @@ def healtcheck(request):
     return render(request, 'admin/healthcheck.html')
 
 
-
+from django.views.decorators.csrf import csrf_exempt
+@csrf_exempt
 def loadjsonindb(request):
     if request.method == "POST":
-       text = request.POST['text']
+       #text = request.POST['text']
 
-       test_json = json.loads(text)
+       #test_json = json.loads(text)
+       test_json = json.loads(request.body)
 
     #   datet = datetime.now()
-       datet = datetime.date(2020, 5, 30) 
+       #datet = datetime.date(2020, 6, 30) 
+       datet = datetime.date.today() #it will add todays dates.
        for item in test_json:
           ip = item['IPAddress'].strip()
           healthCheck.objects.create(desc=item['Test Description'], severity=item['Severity'], ipaddr=ip, hostname=item['Hostname'], command=item['Command-Executed'], verdict=item['Verdict'], remarks=item['Remarks'],test_id=item['Test ID'],date=datet)
@@ -44,12 +49,12 @@ def loadjsonindb(request):
        #print(test_json) 
        #return HttpResponse(test_json[0]['Test_Description'])
        return HttpResponse("<em>DATA Stored</em>")
-    else:
+    if request.method == "GET":
       date_list = healthCheck.objects.values("date").distinct()
       print(date_list)
+      return HttpResponse(date_list)
           
-    #  return HttpResponse("<em>This is for Unica</em>")
-      return render(request, 'upload.html',{'dates':date_list})
+    return render(request, 'upload.html')
 
 
 
@@ -420,3 +425,22 @@ def dbdata1(request):
     
     return JsonResponse(result)
 
+
+@csrf_exempt
+def logfile(request):
+    if request.method == 'POST':
+       form = LogfileForm(request.POST, request.FILES)
+       #u_file = request.FILES['file']
+       print(form)
+       form.uploaded_at = datetime.date.today()
+       #extension = u_file.split(".")[1].lower()
+       if form.is_valid():
+            #return HttpResponse("Log File Uploaded!!!!!! ===")
+            form.save()
+            return HttpResponse("Log File Uploaded...Yes")
+       else:
+            print(form.errors)
+            return HttpResponse("Log File Uploaded....NONONO")
+     
+    else:
+      return render(request,'test.html')
