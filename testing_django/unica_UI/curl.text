@@ -1,7 +1,6 @@
+#curl to send json data to django
 curl -X POST -d @data.json http://34.70.189.147:8080/loadjsonindb --header "Content-Type:application/json"
-loadjsonindb
-curl -X POST -d @data.json http://34.70.189.147:8080/loadjsonindb --header "Content-Type:application/json"
 
 
-
-curl -X POST -F "file=@data.json" http://34.68.142.240:8080/logfile
+date='2020-3-9'  #yyyy-MM-dd'
+curl -X POST -F "logfile=@log_{{date}}.txt" -F "uploaded_at={{date}}" http://34.68.142.240:8080/logfile
